@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "prayerName": "Sign of the Cross",
+    "prayerText": "In the name of the Father, \nand of the Son, \nand of the Holy Spirit. \nAmen.",
+    "youtubeUrl": ""
+  },
+  {
+    "id": 2,
+    "prayerName": "Apostle's Creed",
+    "prayerText": "I believe in God, the Father almighty,\ncreator of heaven and earth.\n\nI believe in Jesus Christ, his only Son, our Lord,\nwho was conceived by the Holy Spirit\nand born of the virgin Mary.\nHe suffered under Pontius Pilate,\nwas crucified, died, and was buried;\nhe descended to hell.\nThe third day he rose again from the dead.\nHe ascended to heaven\nand is seated at the right hand of God the Father almighty.\nFrom there he will come to judge the living and the dead.\n\nI believe in the Holy Spirit,\nthe holy catholic Church,\nthe communion of saints,\nthe forgiveness of sins,\nthe resurrection of the body,\nand the life everlasting. \nAmen.",
+    "youtubeUrl": ""
+  },
+  {
+    "id": 3,
+    "prayerName": "Lord's Prayer",
+    "prayerText": "Our Father who art in heaven,\nhallowed be thy name.\nThy kingdom come.\nThy will be done\non earth as it is in heaven.\nGive us this day our daily bread,\nand forgive us our trespasses,\nas we forgive those who trespass against us,\nand lead us not into temptation,\nbut deliver us from evil.\nFor thine is the kingdom and the power, and the glory,\nforever and ever.\n\nAmen.",
+    "youtubeUrl": ""
+  },
+  {
+    "id": 4,
+    "prayerName": "Hail Mary",
+    "prayerText": "Hail, Mary, full of grace,\nthe Lord is with thee.\nBlessed art thou among women\nand blessed is the fruit of thy womb, Jesus.\nHoly Mary, Mother of God,\npray for us sinners,\nnow and at the hour of our death. \nAmen.",
+    "youtubeUrl": ""
+  },
+  {
+    "id": 5,
+    "prayerName": "Glory Be",
+    "prayerText": "Glory be to the Father,\nand to the Son,\nand to the Holy Spirit:\nAs it was in the beginning,\nis now,\nand ever shall be,\nworld without end.\nAmen.",
+    "youtubeUrl": ""
+  },
+  {
+    "id": 6,
+    "prayerName": "Fatima Prayer",
+    "prayerText": "O My Jesus, \nforgive us our sins, \nsave us from the fires of Hell \nand lead all souls to Heaven, \nespecially those who are in most need of Thy mercy.",
+    "youtubeUrl": ""
+  },
+  {
+    "id": 7,
+    "prayerName": "Hail Holy Queen",
+    "prayerText": "Hail, Holy Queen, Mother of Mercy,\nour life, our sweetness and our hope.\nTo thee do we cry, \npoor banished children of Eve.\nTo thee do we send up our sighs,\nmourning and weeping in this valley of tears.\nTurn then, most gracious advocate,\nthine eyes of mercy toward us,\nand after this our exile\nshow unto us the blessed fruit of thy womb, Jesus.\nO clement, O loving,\nO sweet Virgin Mary.",
+    "youtubeUrl": ""
+  } ,
+  {
+    "id": 8,
+    "prayerName": "Concluding Prayer",
+    "prayerText": "O God, whose only begotten Son, \nby His life, death, and resurrection, \nhas purchased for us the rewards of eternal salvation. \nGrant, we beseech Thee, that while meditating on these mysteries \nof the most holy Rosary of the Blessed Virgin Mary, \nthat we may both imitate what they contain and obtain what they promise, \nthrough Christ our Lord. \nAmen.",
+    "youtubeUrl": ""
+  }
+]

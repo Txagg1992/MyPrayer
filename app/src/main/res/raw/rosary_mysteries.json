@@ -1,0 +1,172 @@
+{
+  "mysterySets": [
+    {
+      "id": 1,
+      "name": "Joyful Mysteries",
+      "day": "Monday, Saturday",
+      "mysteries": [
+        {
+          "id": 1,
+          "name": "The Annunciation",
+          "scripture": "Luke 1:28",
+          "youtubeUrl": null,
+          "meditation": "He came to her and said, 'Hail, full of grace, the Lord is with you'."
+        },
+        {
+          "id": 2,
+          "name": "The Visitation",
+          "scripture": "Luke 1:39-56",
+          "youtubeUrl": null,
+          "meditation": "Mary travels in haste to serve Elizabeth. Filled with Christ, she brings joy to others, and Elizabeth recognizes the presence of the Lord. This mystery invites us to carry Christ into the lives of others through love, service, and generosity."
+        },
+        {
+          "id": 3,
+          "name": "The Nativity",
+          "scripture": "Luke 2:1-20",
+          "youtubeUrl": null,
+          "meditation": "Jesus is born in humility in a manger. The King of Kings enters the world not in power, but in simplicity and poverty. We are reminded to seek Christ not in worldly success, but in quiet, humble places."
+        },
+        {
+          "id": 4,
+          "name": "The Presentation",
+          "scripture": "Luke 2:22-35",
+          "youtubeUrl": null,
+          "meditation": "Mary and Joseph present Jesus in the Temple, offering Him to God. Simeon foretells both joy and sorrow. This mystery teaches obedience, trust, and offering everything we love back to God."
+        },
+        {
+          "id": 5,
+          "name": "The Finding in the Temple",
+          "scripture": "Luke 2:41-52",
+          "youtubeUrl": null,
+          "meditation": "After three days of searching, Mary and Joseph find Jesus in the Temple. Even in confusion and worry, they trust in God's plan. This mystery reminds us to seek Christ patiently, especially when He feels distant."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Sorrowful Mysteries",
+      "day": "Tuesday, Friday",
+      "mysteries": [
+        {
+          "id": 1,
+          "name": "The Agony in the Garden",
+          "scripture": "Matthew 26:36-46",
+          "youtubeUrl": null,
+          "meditation": "Jesus prays in deep anguish, accepting the Father's will despite His suffering. He shows us how to trust God in moments of fear and pain, saying, 'Not my will, but yours be done.'"
+        },
+        {
+          "id": 2,
+          "name": "The Scourging at the Pillar",
+          "scripture": "John 19:1",
+          "youtubeUrl": null,
+          "meditation": "Jesus is brutally scourged for our sins. His suffering reveals the depth of His love and sacrifice. This mystery calls us to repentance and gratitude for His mercy."
+        },
+        {
+          "id": 3,
+          "name": "The Crowning with Thorns",
+          "scripture": "Matthew 27:27-31",
+          "youtubeUrl": null,
+          "meditation": "Jesus is mocked and crowned with thorns. Though humiliated, He remains silent and loving. We reflect on humility and enduring injustice with grace."
+        },
+        {
+          "id": 4,
+          "name": "The Carrying of the Cross",
+          "scripture": "Luke 23:26-32",
+          "youtubeUrl": null,
+          "meditation": "Jesus carries His cross toward Calvary, falling under its weight. He invites us to take up our own crosses and follow Him with perseverance and faith."
+        },
+        {
+          "id": 5,
+          "name": "The Crucifixion",
+          "scripture": "Luke 23:33-46",
+          "youtubeUrl": null,
+          "meditation": "Jesus dies on the cross, offering His life for the salvation of the world. His final words are forgiveness and love. This mystery invites us to contemplate sacrificial love."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Glorious Mysteries",
+      "day": "Wednesday, Sunday",
+      "mysteries": [
+        {
+          "id": 1,
+          "name": "The Resurrection",
+          "scripture": "Matthew 28:1-10",
+          "youtubeUrl": null,
+          "meditation": "Jesus rises from the dead, conquering sin and death. This mystery fills us with hope and reminds us that new life is always possible in Christ."
+        },
+        {
+          "id": 2,
+          "name": "The Ascension",
+          "scripture": "Acts 1:6-11",
+          "youtubeUrl": null,
+          "meditation": "Jesus ascends into Heaven, opening the gates for us. He calls us to focus on eternal things and to continue His mission on earth."
+        },
+        {
+          "id": 3,
+          "name": "The Descent of the Holy Spirit",
+          "scripture": "Acts 2:1-4",
+          "youtubeUrl": null,
+          "meditation": "The Holy Spirit descends upon the apostles, filling them with courage and wisdom. This mystery invites us to be open to the Spirit's guidance."
+        },
+        {
+          "id": 4,
+          "name": "The Assumption",
+          "scripture": "Revelation 12:1",
+          "youtubeUrl": null,
+          "meditation": "Mary is taken body and soul into Heaven. She shares fully in Christ's victory and points us toward our eternal destiny."
+        },
+        {
+          "id": 5,
+          "name": "The Coronation of Mary",
+          "scripture": "Revelation 12:1",
+          "youtubeUrl": null,
+          "meditation": "Mary is crowned Queen of Heaven and Earth. This mystery reminds us of the reward of faithfulness and the joy of eternal life with God."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Luminous Mysteries",
+      "day": "Thursday",
+      "mysteries": [
+        {
+          "id": 1,
+          "name": "The Baptism of Jesus",
+          "scripture": "Matthew 3:13-17",
+          "youtubeUrl": null,
+          "meditation": "Jesus is baptized in the Jordan, and the Father declares Him beloved. This mystery reminds us of our own baptism and identity as children of God."
+        },
+        {
+          "id": 2,
+          "name": "The Wedding at Cana",
+          "scripture": "John 2:1-11",
+          "youtubeUrl": null,
+          "meditation": "Jesus performs His first miracle at Mary's request. Through her intercession, water becomes wine. This mystery encourages us to trust in Mary's guidance toward Christ."
+        },
+        {
+          "id": 3,
+          "name": "The Proclamation of the Kingdom",
+          "scripture": "Mark 1:14-15",
+          "youtubeUrl": null,
+          "meditation": "Jesus calls all people to repentance and announces the Kingdom of God. This mystery challenges us to conversion and living the Gospel daily."
+        },
+        {
+          "id": 4,
+          "name": "The Transfiguration",
+          "scripture": "Luke 9:28-36",
+          "youtubeUrl": null,
+          "meditation": "Jesus is transfigured in glory before His disciples. The Father again calls Him beloved. This mystery strengthens our faith in Christ's divine nature."
+        },
+        {
+          "id": 5,
+          "name": "The Institution of the Eucharist",
+          "scripture": "Luke 22:19-20",
+          "youtubeUrl": null,
+          "meditation": "At the Last Supper, Jesus gives His Body and Blood. This mystery invites us into deep communion with Him through the Eucharist."
+        }
+      ]
+    }
+  ]
+}
