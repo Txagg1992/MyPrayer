@@ -6,47 +6,58 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.curiousapps.myprayer.data.RosaryPrayersItem
 
 @Composable
 fun RosaryScreen(
     modifier: Modifier = Modifier,
     viewModel: RosaryViewModel = hiltViewModel(),
-    onNavigateToPrayer: (RosaryPrayersItem) -> Unit = {}
+    onNavigateToPrayer: (Int) -> Unit = {}
 ) {
     val state by viewModel.state.collectAsState(RosaryViewModel.RosaryState())
     val displayPrayerList = state.displayPrayers
     val isLoading = state.isLoading
     val error = state.error
+    val listScrollState = rememberScrollState()
+    val lastListScrollOffset = state.lastListScrollOffset
 
-    GradientBackground(
-        primaryColor = Color.LightGray,
-    )
+    LaunchedEffect(lastListScrollOffset, listScrollState.maxValue) {
+        listScrollState.scrollTo(lastListScrollOffset.coerceAtMost(listScrollState.maxValue))
+    }
+
+    GradientBackground(primaryColor = Color.LightGray)
 
     Column(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(listScrollState)
     ) {
         when {
             isLoading -> Text(text = "Loading prayers...")
             error != null -> Text(text = "Error: $error")
             else -> {
-                displayPrayerList.forEach { prayer ->
+                displayPrayerList.forEachIndexed { index, prayer ->
                     RosaryPrayerRow(
                         prayer = prayer,
-                        onClick = { onNavigateToPrayer(prayer) }
+                        stepNumber = index + 1,
+                        onClick = {
+                            viewModel.saveListScrollOffset(listScrollState.value)
+                            onNavigateToPrayer(index)
+                        }
                     )
+                    HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 }
             }
         }
@@ -57,6 +68,7 @@ fun RosaryScreen(
 @Composable
 private fun RosaryPrayerRow(
     prayer: RosaryPrayersItem,
+    stepNumber: Int,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -64,23 +76,11 @@ private fun RosaryPrayerRow(
         modifier = modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
-            .padding(vertical = 8.dp, horizontal = 16.dp)
+            .padding(vertical = 12.dp, horizontal = 16.dp)
     ) {
         Text(
-            text = prayer.prayerName,
+            text = "$stepNumber. ${prayer.prayerName}",
             style = MaterialTheme.typography.titleMedium
         )
-        Text(
-            text = prayer.prayerText,
-            modifier = Modifier.padding(top = 4.dp)
-        )
-        if (prayer.youtubeUrl.isNotBlank()) {
-            Text(
-                text = prayer.youtubeUrl,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(top = 4.dp)
-            )
-        }
     }
 }
-

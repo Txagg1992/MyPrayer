@@ -53,10 +53,15 @@ class RosaryViewModel @Inject constructor(
     }
 
 
+    fun saveListScrollOffset(offset: Int) {
+        _state.value = _state.value.copy(lastListScrollOffset = offset)
+    }
+
     data class RosaryState(
         val prayers: List<RosaryPrayersItem> = emptyList(),
         val displayPrayers: List<RosaryPrayersItem> = emptyList(),
         val todaysMysterySetName: String? = null,
+        val lastListScrollOffset: Int = 0,
         val isLoading: Boolean = false,
         val error: String? = null
     )

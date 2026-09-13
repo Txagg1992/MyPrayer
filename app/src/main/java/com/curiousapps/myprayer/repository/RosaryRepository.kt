@@ -9,6 +9,7 @@ import com.curiousapps.myprayer.data.RosaryPrayers
 import com.curiousapps.myprayer.data.RosaryPrayersItem
 import com.google.gson.Gson
 import dagger.hilt.android.qualifiers.ApplicationContext
+import timber.log.Timber
 import java.time.DayOfWeek
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -45,7 +46,7 @@ class RosaryRepositoryImpl @Inject constructor(
             val jsonString = inputStream.bufferedReader().use { it.readText() }
             Gson().fromJson(jsonString, RosaryPrayers::class.java)
         } catch (exception: Exception) {
-            Log.e(TAG, "Failed to parse rosary_prayers.json", exception)
+            Timber.tag(TAG).e(exception, "Failed to parse rosary_prayers.json")
             emptyList()
         }
     }
@@ -56,7 +57,7 @@ class RosaryRepositoryImpl @Inject constructor(
             val jsonString = inputStream.bufferedReader().use { it.readText() }
             Gson().fromJson(jsonString, RosaryMysteriesResponse::class.java).mysterySets
         } catch (exception: Exception) {
-            Log.e(TAG, "Failed to parse rosary_mysteries.json", exception)
+            Timber.tag(TAG).e(exception, "Failed to parse rosary_mysteries.json")
             emptyList()
         }
     }

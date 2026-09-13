@@ -22,26 +22,71 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.curiousapps.myprayer.ui.presentation.RosaryViewModel
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.curiousapps.myprayer.mainComponents.DrawerContent
+import com.curiousapps.myprayer.ui.presentation.PrayerDetailScreen
 import com.curiousapps.myprayer.ui.presentation.RosaryScreen
 import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 @AndroidEntryPoint
-class MainActivity : ComponentActivity(){
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             MyPrayerTheme {
-                AppDrawer { innerPadding ->
-                    RosaryScreen(
-                        modifier = Modifier.padding(innerPadding),
-                    )
-//                    Greeting(
-//                        name = "Android",
-//                        modifier = Modifier.padding(innerPadding))
+                val navController = rememberNavController()
+                val viewModel: RosaryViewModel = hiltViewModel()
+                val state by viewModel.state.collectAsState(RosaryViewModel.RosaryState())
+
+                AppDrawer(
+                    onPrayerClick = { prayerName ->
+                        val index = state.displayPrayers.indexOfFirst { it.prayerName == prayerName }
+                        if (index >= 0) navController.navigate("prayer_detail/$index")
+                    },
+                    onRosaryTodayClick = {
+                        navController.navigate("rosary_list") {
+                            popUpTo("rosary_list") { inclusive = true }
+                            launchSingleTop = true
+                        }
+                    }
+                ) { innerPadding ->
+                    NavHost(
+                        navController = navController,
+                        startDestination = "rosary_list",
+                        modifier = Modifier.padding(innerPadding)
+                    ) {
+                        composable("rosary_list") {
+                            RosaryScreen(
+                                onNavigateToPrayer = { index ->
+                                    navController.navigate("prayer_detail/$index")
+                                }
+                            )
+                        }
+                        composable(
+                            route = "prayer_detail/{prayerIndex}",
+                            arguments = listOf(
+                                navArgument("prayerIndex") { type = NavType.IntType }
+                            )
+                        ) { backStackEntry ->
+                            val index = backStackEntry.arguments?.getInt("prayerIndex") ?: 0
+                            PrayerDetailScreen(
+                                startIndex = index,
+                                onNavigateBack = { navController.popBackStack() }
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -51,6 +96,8 @@ class MainActivity : ComponentActivity(){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppDrawer(
+    onPrayerClick: (String) -> Unit = {},
+    onRosaryTodayClick: () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit
 ) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -60,6 +107,14 @@ fun AppDrawer(
         drawerContent = {
             ModalDrawerSheet {
                 DrawerContent(
+                    onPrayerClick = { name ->
+                        scope.launch { drawerState.close() }
+                        onPrayerClick(name)
+                    },
+                    onRosaryTodayClick = {
+                        scope.launch { drawerState.close() }
+                        onRosaryTodayClick()
+                    },
                     onNavigationClick = {
                         scope.launch { drawerState.close() }
                     }
@@ -88,20 +143,5 @@ fun AppDrawer(
         ) { innerPadding ->
             content(innerPadding)
         }
-    }
-}
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MyPrayerTheme {
-        Greeting("Android")
     }
 }
