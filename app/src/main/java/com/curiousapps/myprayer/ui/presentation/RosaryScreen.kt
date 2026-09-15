@@ -42,6 +42,7 @@ fun RosaryScreen(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
+            .padding(bottom = 32.dp)
             .verticalScroll(listScrollState)
     ) {
         when {

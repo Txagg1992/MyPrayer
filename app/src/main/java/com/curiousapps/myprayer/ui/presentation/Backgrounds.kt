@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.curiousapps.myprayer.R
 
 @Composable
@@ -32,12 +33,11 @@ fun BackgroundWithCross(
 @Composable
 fun GradientBackground(
     primaryColor: Color,
-    topColor: Color = Color(0xFFFFD700),
+    topColor: Color = Color(0xFFFFE26D),
     bottomColor: Color = Color(0xFF7717F0)
 ) {
     val gradient = Brush.verticalGradient(
         listOf(
-            topColor,
             topColor,
             primaryColor,
             primaryColor,
@@ -56,5 +56,21 @@ fun GradientBackground(
         modifier = Modifier
             .fillMaxSize()
             .background(gradient)
+    )
+}
+
+@Composable
+@Preview
+fun GradientBackgroundPreview() {
+    GradientBackground(
+        primaryColor = Color.LightGray
+    )
+}
+
+@Composable
+@Preview
+fun BackgroundWithCrossPreview(){
+    BackgroundWithCross(
+        crossResource = painterResource(id = R.drawable.celtic_cross)
     )
 }

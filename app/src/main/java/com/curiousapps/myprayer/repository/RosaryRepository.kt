@@ -1,7 +1,6 @@
 package com.curiousapps.myprayer.repository
 
 import android.content.Context
-import android.util.Log
 import com.curiousapps.myprayer.R
 import com.curiousapps.myprayer.data.RosaryMysteriesResponse
 import com.curiousapps.myprayer.data.RosaryMysterySet
@@ -13,7 +12,6 @@ import timber.log.Timber
 import java.time.DayOfWeek
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.getValue
 
 interface RosaryRepository {
     suspend fun getRosaryPrayers(): List<RosaryPrayersItem>

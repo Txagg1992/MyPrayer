@@ -17,15 +17,15 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.curiousapps.myprayer.ui.presentation.RosaryViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -34,6 +34,7 @@ import androidx.navigation.navArgument
 import com.curiousapps.myprayer.mainComponents.DrawerContent
 import com.curiousapps.myprayer.ui.presentation.PrayerDetailScreen
 import com.curiousapps.myprayer.ui.presentation.RosaryScreen
+import com.curiousapps.myprayer.ui.presentation.RosaryViewModel
 import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -137,7 +138,10 @@ fun AppDrawer(
                         }) {
                             Icon(Icons.Default.Menu, contentDescription = "Menu")
                         }
-                    }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = Color(0xFFFFE26D)
+                    )
                 )
             }
         ) { innerPadding ->
