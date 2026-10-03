@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBackIos
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -46,6 +46,7 @@ fun PrayerDetailScreen(
     val prayers = state.displayPrayers
     var currentIndex by rememberSaveable { mutableIntStateOf(startIndex) }
     val prayer = prayers.getOrNull(currentIndex)
+    val appBarContentColor = Color.DarkGray
 
     GradientBackground(primaryColor = Color.LightGray)
 
@@ -58,15 +59,17 @@ fun PrayerDetailScreen(
         ) {
             IconButton(onClick = onNavigateBack) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Back to list"
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBackIos,
+                    contentDescription = "Back to list",
+                    tint = appBarContentColor
                 )
             }
             Text(
                 text = prayer?.prayerName ?: "",
                 style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                color = appBarContentColor
             )
             Spacer(modifier = Modifier.size(48.dp))
         }
@@ -104,13 +107,15 @@ fun PrayerDetailScreen(
                     Text(
                         text = prayer.prayerText,
                         style = MaterialTheme.typography.bodyLarge,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        color = Color.DarkGray
                     )
                     if (prayer.youtubeUrl.isNotBlank()) {
                         Text(
                             text = prayer.youtubeUrl,
                             style = MaterialTheme.typography.bodySmall,
-                            modifier = Modifier.padding(top = 8.dp)
+                            modifier = Modifier.padding(top = 8.dp),
+                            color = Color.DarkGray
                         )
                     }
                 }

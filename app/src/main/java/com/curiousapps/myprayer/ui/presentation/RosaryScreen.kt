@@ -16,7 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.curiousapps.myprayer.data.RosaryPrayersItem
 
 @Composable
@@ -81,7 +81,8 @@ private fun RosaryPrayerRow(
     ) {
         Text(
             text = "$stepNumber. ${prayer.prayerName}",
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleMedium,
+            color = Color.DarkGray
         )
     }
 }

@@ -126,8 +126,9 @@ fun AppDrawer(
     ) {
         Scaffold(
             topBar = {
+                val appBarContentColor = Color.DarkGray
                 TopAppBar(
-                    title = { Text("My Prayer App") },
+                    title = { Text("My Prayer App", color = appBarContentColor) },
                     navigationIcon = {
                         IconButton(onClick = {
                             scope.launch {
@@ -136,11 +137,17 @@ fun AppDrawer(
                                 }
                             }
                         }) {
-                            Icon(Icons.Default.Menu, contentDescription = "Menu")
+                            Icon(
+                                Icons.Default.Menu,
+                                contentDescription = "Menu",
+                                tint = appBarContentColor
+                            )
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = Color(0xFFFFE26D)
+                        containerColor = Color(0xFFFFE26D),
+                        titleContentColor = appBarContentColor,
+                        navigationIconContentColor = appBarContentColor
                     )
                 )
             }
