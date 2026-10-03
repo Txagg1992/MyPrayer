@@ -8,6 +8,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -26,6 +27,7 @@ fun DrawerContent(
     onNavigationClick: () -> Unit = {},
     onPrayerClick: (String) -> Unit = {},
     onRosaryTodayClick: () -> Unit = {},
+    onHomeClick: () -> Unit = {},
 ) {
     Column(
         modifier = modifier.padding(horizontal = 16.dp)
@@ -36,6 +38,12 @@ fun DrawerContent(
         HorizontalDivider()
 
         Text("Rosary", modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.titleMedium)
+        NavigationDrawerItem(
+            label = { Text("Home") },
+            selected = false,
+            icon = { Icon(Icons.Default.Home, contentDescription = null) },
+            onClick = { onHomeClick() }
+        )
         NavigationDrawerItem(
             label = { Text("Rosary Today") },
             selected = false,
@@ -80,6 +88,12 @@ fun DrawerContent(
             selected = false,
             icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
             onClick = { onPrayerClick("Hail Holy Queen") }
+        )
+        NavigationDrawerItem(
+            label = { Text("Concluding Prayer") },
+            selected = false,
+            icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
+            onClick = { onPrayerClick("Concluding Prayer") }
         )
         HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
         Text("Saint's Prayers", modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.titleMedium)
