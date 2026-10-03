@@ -1,7 +1,7 @@
 package com.curiousapps.myprayer.di
 
-import com.curiousapps.myprayer.repository.RosaryRepository
-import com.curiousapps.myprayer.repository.RosaryRepositoryImpl
+import com.curiousapps.myprayer.repository.PrayerRepository
+import com.curiousapps.myprayer.repository.PrayerRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,6 +13,6 @@ interface RosaryModule {
 
     @Binds
     fun bindRosaryRepository(
-        implementation: RosaryRepositoryImpl
-    ): RosaryRepository
+        implementation: PrayerRepositoryImpl
+    ): PrayerRepository
 }

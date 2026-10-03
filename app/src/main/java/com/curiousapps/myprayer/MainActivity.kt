@@ -54,8 +54,15 @@ class MainActivity : ComponentActivity() {
 
                 AppDrawer(
                     onPrayerClick = { prayerName ->
-                        val index = state.displayPrayers.indexOfFirst { it.prayerName == prayerName }
-                        if (index >= 0) navController.navigate("prayer_detail/$index")
+                        val rosaryIndex = state.displayPrayers.indexOfFirst { it.prayerName == prayerName }
+                        if (rosaryIndex >= 0) {
+                            navController.navigate("prayer_detail/$rosaryIndex")
+                        } else {
+                            val saintIndex = state.saintPrayers.indexOfFirst { it.prayerName == prayerName }
+                            if (saintIndex >= 0) {
+                                navController.navigate("saint_prayer_detail/$saintIndex")
+                            }
+                        }
                     },
                     onHomeClick = {
                         navController.navigate("launch") {
@@ -68,6 +75,9 @@ class MainActivity : ComponentActivity() {
                             popUpTo("rosary_list") { inclusive = true }
                             launchSingleTop = true
                         }
+                    },
+                    onExitClick = {
+                        finish()
                     }
                 ) { innerPadding ->
                     NavHost(
@@ -97,6 +107,19 @@ class MainActivity : ComponentActivity() {
                                 onNavigateBack = { navController.popBackStack() }
                             )
                         }
+                        composable(
+                            route = "saint_prayer_detail/{prayerIndex}",
+                            arguments = listOf(
+                                navArgument("prayerIndex") { type = NavType.IntType }
+                            )
+                        ) { backStackEntry ->
+                            val index = backStackEntry.arguments?.getInt("prayerIndex") ?: 0
+                            PrayerDetailScreen(
+                                startIndex = index,
+                                prayersOverride = state.saintPrayers,
+                                onNavigateBack = { navController.popBackStack() }
+                            )
+                        }
                     }
                 }
             }
@@ -111,6 +134,7 @@ fun AppDrawer(
     onPrayerClick: (String) -> Unit = {},
     onHomeClick: () -> Unit = {},
     onRosaryTodayClick: () -> Unit = {},
+    onExitClick: () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit
 ) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -131,6 +155,10 @@ fun AppDrawer(
                     onHomeClick = {
                         scope.launch { drawerState.close() }
                         onHomeClick()
+                    },
+                    onExitClick = {
+                        scope.launch { drawerState.close() }
+                        onExitClick()
                     },
                     onNavigationClick = {
                         scope.launch { drawerState.close() }

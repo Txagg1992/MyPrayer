@@ -34,16 +34,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.curiousapps.myprayer.R
+import com.curiousapps.myprayer.data.RosaryPrayersItem
 
 @Composable
 fun PrayerDetailScreen(
     startIndex: Int,
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
+    prayersOverride: List<RosaryPrayersItem>? = null,
     viewModel: RosaryViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    val prayers = state.displayPrayers
+    val prayers = prayersOverride ?: state.displayPrayers
     var currentIndex by rememberSaveable { mutableIntStateOf(startIndex) }
     val prayer = prayers.getOrNull(currentIndex)
     val appBarContentColor = Color.DarkGray
@@ -101,8 +103,8 @@ fun PrayerDetailScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             when {
-                state.isLoading -> CircularProgressIndicator()
-                state.error != null -> Text(text = "Error: ${state.error}")
+                prayersOverride == null && state.isLoading -> CircularProgressIndicator()
+                prayersOverride == null && state.error != null -> Text(text = "Error: ${state.error}")
                 prayer != null -> {
                     Text(
                         text = prayer.prayerText,

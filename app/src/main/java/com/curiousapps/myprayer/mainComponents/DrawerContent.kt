@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
@@ -28,6 +29,7 @@ fun DrawerContent(
     onPrayerClick: (String) -> Unit = {},
     onRosaryTodayClick: () -> Unit = {},
     onHomeClick: () -> Unit = {},
+    onExitClick: () -> Unit = {},
 ) {
     Column(
         modifier = modifier.padding(horizontal = 16.dp)
@@ -102,31 +104,31 @@ fun DrawerContent(
             label = { Text("Prayer to St. Michael") },
             selected = false,
             icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onNavigationClick()}
+            onClick = { onPrayerClick("Prayer to St. Michael") }
         )
         NavigationDrawerItem(
             label = { Text("Prayer to Archangel – Gabriel") },
             selected = false,
             icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onNavigationClick()}
+            onClick = { onPrayerClick("Prayer to Archangel – Gabriel") }
         )
         NavigationDrawerItem(
             label = { Text("Prayer to Archangel – Raphael") },
             selected = false,
             icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onNavigationClick()}
+            onClick = { onPrayerClick("Prayer to Archangel – Raphael") }
         )
         NavigationDrawerItem(
             label = { Text("Prayer to St. Christopher \n (Protection)") },
             selected = false,
             icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onNavigationClick()}
+            onClick = { onPrayerClick("Prayer to St. Christopher (Protection)") }
         )
         NavigationDrawerItem(
             label = { Text("Prayer to St. Christopher \n (Traveller)") },
             selected = false,
             icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onNavigationClick()}
+            onClick = { onPrayerClick("Prayer to St. Christopher (Traveller)") }
         )
 
         HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
@@ -143,6 +145,12 @@ fun DrawerContent(
             selected = false,
             icon = { Icon(Icons.Default.Email, contentDescription = null) },
             onClick = { onNavigationClick()},
+        )
+        NavigationDrawerItem(
+            label = { Text("Exit App") },
+            selected = false,
+            icon = { Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = null) },
+            onClick = { onExitClick() },
         )
         Spacer(Modifier.height(12.dp))
     }

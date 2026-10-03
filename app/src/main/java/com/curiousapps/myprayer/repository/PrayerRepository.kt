@@ -13,15 +13,15 @@ import java.time.DayOfWeek
 import javax.inject.Inject
 import javax.inject.Singleton
 
-interface RosaryRepository {
+interface PrayerRepository {
     suspend fun getRosaryPrayers(): List<RosaryPrayersItem>
     suspend fun getMysterySetForDay(dayOfWeek: DayOfWeek): RosaryMysterySet?
 }
 
 @Singleton
-class RosaryRepositoryImpl @Inject constructor(
+class PrayerRepositoryImpl @Inject constructor(
     @param:ApplicationContext private val context: Context
-) : RosaryRepository {
+) : PrayerRepository {
 
     private val rosaryPrayers by lazy { parseRosaryPrayerList() }
     private val rosaryMysterySets by lazy { parseRosaryMysterySets() }
