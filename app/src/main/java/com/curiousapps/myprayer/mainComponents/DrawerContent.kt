@@ -8,6 +8,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.ArrowDropUp
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
@@ -17,6 +19,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -36,6 +42,9 @@ fun DrawerContent(
     onHomeClick: () -> Unit = {},
     onExitClick: () -> Unit = {},
 ) {
+    var showRosaryPrayers by rememberSaveable { mutableStateOf(false) }
+    var showSaintPrayers by rememberSaveable { mutableStateOf(false) }
+
     Column(
         modifier = modifier
             .padding(horizontal = dimen16Dp)
@@ -59,83 +68,115 @@ fun DrawerContent(
             onClick = { onRosaryTodayClick() }
         )
         HorizontalDivider(modifier = Modifier.padding(vertical = dimen8Dp))
-        Text(stringResource(R.string.rosary_prayers), modifier = Modifier.padding(dimen16Dp), style = MaterialTheme.typography.titleMedium)
+        NavigationDrawerItem(
+            label = { Text(stringResource(R.string.rosary_prayers)) },
+            selected = false,
+            icon = {
+                Icon(
+                    imageVector = if (showRosaryPrayers) {
+                        Icons.Default.ArrowDropUp
+                    } else {
+                        Icons.Default.ArrowDropDown
+                    },
+                    contentDescription = null
+                )
+            },
+            onClick = { showRosaryPrayers = !showRosaryPrayers }
+        )
 
-        NavigationDrawerItem(
-            label = { Text(stringResource(R.string.apostle_s_creed)) },
-            selected = false,
-            icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onPrayerClick("Apostle's Creed") }
-        )
-        NavigationDrawerItem(
-            label = { Text(stringResource(R.string.lord_s_prayer)) },
-            selected = false,
-            icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onPrayerClick("Lord's Prayer") }
-        )
-        NavigationDrawerItem(
-            label = { Text(stringResource(R.string.hail_mary)) },
-            selected = false,
-            icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onPrayerClick("Hail Mary") }
-        )
-        NavigationDrawerItem(
-            label = { Text(stringResource(R.string.glory_be)) },
-            selected = false,
-            icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onPrayerClick("Glory Be") }
-        )
-        NavigationDrawerItem(
-            label = { Text(stringResource(R.string.fatima_prayer)) },
-            selected = false,
-            icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onPrayerClick("Fatima Prayer") }
-        )
-        NavigationDrawerItem(
-            label = { Text(stringResource(R.string.hail_holy_queen)) },
-            selected = false,
-            icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onPrayerClick("Hail Holy Queen") }
-        )
-        NavigationDrawerItem(
-            label = { Text(stringResource(R.string.concluding_prayer)) },
-            selected = false,
-            icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onPrayerClick("Concluding Prayer") }
-        )
+        if (showRosaryPrayers) {
+            NavigationDrawerItem(
+                label = { Text(stringResource(R.string.apostle_s_creed)) },
+                selected = false,
+                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
+                onClick = { onPrayerClick("Apostle's Creed") }
+            )
+            NavigationDrawerItem(
+                label = { Text(stringResource(R.string.lord_s_prayer)) },
+                selected = false,
+                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
+                onClick = { onPrayerClick("Lord's Prayer") }
+            )
+            NavigationDrawerItem(
+                label = { Text(stringResource(R.string.hail_mary)) },
+                selected = false,
+                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
+                onClick = { onPrayerClick("Hail Mary") }
+            )
+            NavigationDrawerItem(
+                label = { Text(stringResource(R.string.glory_be)) },
+                selected = false,
+                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
+                onClick = { onPrayerClick("Glory Be") }
+            )
+            NavigationDrawerItem(
+                label = { Text(stringResource(R.string.fatima_prayer)) },
+                selected = false,
+                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
+                onClick = { onPrayerClick("Fatima Prayer") }
+            )
+            NavigationDrawerItem(
+                label = { Text(stringResource(R.string.hail_holy_queen)) },
+                selected = false,
+                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
+                onClick = { onPrayerClick("Hail Holy Queen") }
+            )
+            NavigationDrawerItem(
+                label = { Text(stringResource(R.string.concluding_prayer)) },
+                selected = false,
+                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
+                onClick = { onPrayerClick("Concluding Prayer") }
+            )
+        }
         HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-        Text(stringResource(R.string.saint_s_prayers), modifier = Modifier.padding(dimen16Dp), style = MaterialTheme.typography.titleMedium)
+        NavigationDrawerItem(
+            label = { Text(stringResource(R.string.saint_s_prayers)) },
+            selected = false,
+            icon = {
+                Icon(
+                    imageVector = if (showSaintPrayers) {
+                        Icons.Default.ArrowDropUp
+                    } else {
+                        Icons.Default.ArrowDropDown
+                    },
+                    contentDescription = null
+                )
+            },
+            onClick = { showSaintPrayers = !showSaintPrayers }
+        )
 
-        NavigationDrawerItem(
-            label = { Text(stringResource(R.string.prayer_to_st_michael)) },
-            selected = false,
-            icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onPrayerClick("Prayer to St. Michael") }
-        )
-        NavigationDrawerItem(
-            label = { Text(stringResource(R.string.prayer_to_archangel_gabriel)) },
-            selected = false,
-            icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onPrayerClick("Prayer to Archangel – Gabriel") }
-        )
-        NavigationDrawerItem(
-            label = { Text(stringResource(R.string.prayer_to_archangel_raphael)) },
-            selected = false,
-            icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onPrayerClick("Prayer to Archangel – Raphael") }
-        )
-        NavigationDrawerItem(
-            label = { Text(stringResource(R.string.prayer_to_st_christopher_protection)) },
-            selected = false,
-            icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onPrayerClick("Prayer to St. Christopher (Protection)") }
-        )
-        NavigationDrawerItem(
-            label = { Text(stringResource(R.string.prayer_to_st_christopher_traveller)) },
-            selected = false,
-            icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
-            onClick = { onPrayerClick("Prayer to St. Christopher (Traveller)") }
-        )
+        if (showSaintPrayers) {
+            NavigationDrawerItem(
+                label = { Text(stringResource(R.string.prayer_to_st_michael)) },
+                selected = false,
+                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
+                onClick = { onPrayerClick("Prayer to St. Michael") }
+            )
+            NavigationDrawerItem(
+                label = { Text(stringResource(R.string.prayer_to_archangel_gabriel)) },
+                selected = false,
+                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
+                onClick = { onPrayerClick("Prayer to Archangel – Gabriel") }
+            )
+            NavigationDrawerItem(
+                label = { Text(stringResource(R.string.prayer_to_archangel_raphael)) },
+                selected = false,
+                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
+                onClick = { onPrayerClick("Prayer to Archangel – Raphael") }
+            )
+            NavigationDrawerItem(
+                label = { Text(stringResource(R.string.prayer_to_st_christopher_protection)) },
+                selected = false,
+                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
+                onClick = { onPrayerClick("Prayer to St. Christopher (Protection)") }
+            )
+            NavigationDrawerItem(
+                label = { Text(stringResource(R.string.prayer_to_st_christopher_traveller)) },
+                selected = false,
+                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20) ,contentDescription = null) },
+                onClick = { onPrayerClick("Prayer to St. Christopher (Traveller)") }
+            )
+        }
 
         HorizontalDivider(modifier = Modifier.padding(vertical = dimen8Dp))
 
