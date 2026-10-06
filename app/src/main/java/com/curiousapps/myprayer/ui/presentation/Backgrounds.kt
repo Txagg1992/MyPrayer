@@ -33,7 +33,7 @@ fun BackgroundWithCross(
 @Composable
 fun GradientBackground(
     primaryColor: Color,
-    topColor: Color = Color(0xFFFFE26D),
+    topColor: Color = Color(0x8EFFE26D),
     bottomColor: Color = Color(0xFF7717F0)
 ) {
     val gradient = Brush.verticalGradient(
@@ -60,6 +60,23 @@ fun GradientBackground(
 }
 
 @Composable
+fun BackgroundWithStones(
+    stoneResource: Painter = painterResource(id = R.drawable.zen_stones)
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Image(
+            painter = stoneResource,
+            contentDescription = null,
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.matchParentSize()
+        )
+    }
+}
+
+@Composable
 @Preview
 fun GradientBackgroundPreview() {
     GradientBackground(
@@ -72,5 +89,13 @@ fun GradientBackgroundPreview() {
 fun BackgroundWithCrossPreview(){
     BackgroundWithCross(
         crossResource = painterResource(id = R.drawable.celtic_cross)
+    )
+}
+
+@Composable
+@Preview
+fun BackgroundWithStonesPreview(){
+    BackgroundWithStones(
+        stoneResource = painterResource(id = R.drawable.zen_stones)
     )
 }

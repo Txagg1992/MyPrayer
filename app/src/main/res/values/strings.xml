@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">MyPrayer</string>
+    <string name="menu">menu</string>
+    <string name="created_by_cca">Created by CCA for Android</string>
+    <string name="email_curiousaps">Email: curiousaps@gmail.com</string>
+    <string name="curious_custom_apps">Curious Custom Apps</string>
+    <string name="version">Version:</string>
+    <string name="version_number">1.1.0</string>
+    <string name="release">Release: </string>
+    <string name="release_date">10.5.26</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="home">Home</string>
+    <string name="rosary_today">Rosary Today</string>
+    <string name="rosary_prayers">Rosary Prayers</string>
+    <string name="apostle_s_creed">Apostle\'s Creed</string>
+    <string name="lord_s_prayer">Lord\'s Prayer</string>
+    <string name="hail_mary">Hail Mary</string>
+    <string name="glory_be">Glory Be</string>
+    <string name="fatima_prayer">Fatima Prayer</string>
+    <string name="hail_holy_queen">Hail Holy Queen</string>
+    <string name="concluding_prayer">Concluding Prayer</string>
+    <string name="saint_s_prayers">Saint\'s Prayers</string>
+    <string name="my_prayers">My Prayers</string>
+    <string name="rosary">Rosary</string>
+    <string name="prayer_to_st_michael">Prayer to St. Michael</string>
+    <string name="prayer_to_archangel_gabriel">Prayer to Archangel – Gabriel</string>
+    <string name="prayer_to_archangel_raphael">Prayer to Archangel – Raphael</string>
+    <string name="prayer_to_st_christopher_protection">Prayer to St. Christopher \n (Protection)</string>
+    <string name="prayer_to_st_christopher_traveller">Prayer to St. Christopher \n (Traveller)</string>
+    <string name="information">Information</string>
+    <string name="app_information">App Information</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="exit_app">Exit App</string>
 </resources>

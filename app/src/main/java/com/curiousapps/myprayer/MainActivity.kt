@@ -25,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -32,10 +33,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.curiousapps.myprayer.mainComponents.DrawerContent
+import com.curiousapps.myprayer.ui.presentation.AboutScreen
 import com.curiousapps.myprayer.ui.presentation.LaunchScreen
 import com.curiousapps.myprayer.ui.presentation.PrayerDetailScreen
 import com.curiousapps.myprayer.ui.presentation.RosaryScreen
 import com.curiousapps.myprayer.ui.presentation.RosaryViewModel
+import com.curiousapps.myprayer.ui.theme.AppDimens.zero
 import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -55,11 +58,11 @@ class MainActivity : ComponentActivity() {
                 AppDrawer(
                     onPrayerClick = { prayerName ->
                         val rosaryIndex = state.displayPrayers.indexOfFirst { it.prayerName == prayerName }
-                        if (rosaryIndex >= 0) {
+                        if (rosaryIndex >= zero) {
                             navController.navigate("prayer_detail/$rosaryIndex")
                         } else {
                             val saintIndex = state.saintPrayers.indexOfFirst { it.prayerName == prayerName }
-                            if (saintIndex >= 0) {
+                            if (saintIndex >= zero) {
                                 navController.navigate("saint_prayer_detail/$saintIndex")
                             }
                         }
@@ -73,6 +76,11 @@ class MainActivity : ComponentActivity() {
                     onRosaryTodayClick = {
                         navController.navigate("rosary_list") {
                             popUpTo("rosary_list") { inclusive = true }
+                            launchSingleTop = true
+                        }
+                    },
+                    onAboutClick = {
+                        navController.navigate("about") {
                             launchSingleTop = true
                         }
                     },
@@ -95,13 +103,16 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
+                        composable("about") {
+                            AboutScreen()
+                        }
                         composable(
                             route = "prayer_detail/{prayerIndex}",
                             arguments = listOf(
                                 navArgument("prayerIndex") { type = NavType.IntType }
                             )
                         ) { backStackEntry ->
-                            val index = backStackEntry.arguments?.getInt("prayerIndex") ?: 0
+                            val index = backStackEntry.arguments?.getInt("prayerIndex") ?: zero
                             PrayerDetailScreen(
                                 startIndex = index,
                                 onNavigateBack = { navController.popBackStack() }
@@ -113,7 +124,7 @@ class MainActivity : ComponentActivity() {
                                 navArgument("prayerIndex") { type = NavType.IntType }
                             )
                         ) { backStackEntry ->
-                            val index = backStackEntry.arguments?.getInt("prayerIndex") ?: 0
+                            val index = backStackEntry.arguments?.getInt("prayerIndex") ?: zero
                             PrayerDetailScreen(
                                 startIndex = index,
                                 prayersOverride = state.saintPrayers,
@@ -134,6 +145,7 @@ fun AppDrawer(
     onPrayerClick: (String) -> Unit = {},
     onHomeClick: () -> Unit = {},
     onRosaryTodayClick: () -> Unit = {},
+    onAboutClick: () -> Unit = {},
     onExitClick: () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit
 ) {
@@ -156,6 +168,10 @@ fun AppDrawer(
                         scope.launch { drawerState.close() }
                         onHomeClick()
                     },
+                    onAboutClick = {
+                        scope.launch { drawerState.close() }
+                        onAboutClick()
+                    },
                     onExitClick = {
                         scope.launch { drawerState.close() }
                         onExitClick()
@@ -173,7 +189,7 @@ fun AppDrawer(
                 if (showTopBar) {
                     val appBarContentColor = Color.DarkGray
                     TopAppBar(
-                        title = { Text("My Prayer App", color = appBarContentColor) },
+                        title = { Text(stringResource(R.string.app_name), color = appBarContentColor) },
                         navigationIcon = {
                             IconButton(onClick = {
                                 scope.launch {
@@ -184,13 +200,13 @@ fun AppDrawer(
                             }) {
                                 Icon(
                                     Icons.Default.Menu,
-                                    contentDescription = "Menu",
+                                    contentDescription = stringResource(R.string.menu),
                                     tint = appBarContentColor
                                 )
                             }
                         },
                         colors = TopAppBarDefaults.topAppBarColors(
-                            containerColor = Color(0xFFFFE26D),
+                            containerColor = Color(0x8EFFE26D),
                             titleContentColor = appBarContentColor,
                             navigationIconContentColor = appBarContentColor
                         )
