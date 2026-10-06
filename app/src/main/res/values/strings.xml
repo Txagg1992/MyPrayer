@@ -31,4 +31,11 @@
     <string name="app_information">App Information</string>
     <string name="contact_us">Contact Us</string>
     <string name="exit_app">Exit App</string>
+    <string name="support_email_address">curiousaps@gmail.com</string>
+    <string name="contact_us_dialog_message">Open your email app to contact %1$s?</string>
+    <string name="open_email_app">Open Email App</string>
+    <string name="cancel">Cancel</string>
+    <string name="contact_email_subject">MyPrayer Support</string>
+    <string name="contact_email_chooser_title">Send email with</string>
+    <string name="no_email_app_found">No email app found on this device.</string>
 </resources>

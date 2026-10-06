@@ -29,7 +29,7 @@ import com.curiousapps.myprayer.ui.theme.AppDimens.dimen8Dp
 @Composable
 fun DrawerContent(
     modifier: Modifier = Modifier,
-    onNavigationClick: () -> Unit = {},
+    onContactUsClick: () -> Unit = {},
     onAboutClick: () -> Unit = {},
     onPrayerClick: (String) -> Unit = {},
     onRosaryTodayClick: () -> Unit = {},
@@ -150,7 +150,7 @@ fun DrawerContent(
             label = { Text(stringResource(R.string.contact_us)) },
             selected = false,
             icon = { Icon(Icons.Default.Email, contentDescription = null) },
-            onClick = { onNavigationClick()},
+            onClick = { onContactUsClick() },
         )
         NavigationDrawerItem(
             label = { Text(stringResource(R.string.exit_app)) },
