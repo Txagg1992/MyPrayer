@@ -169,6 +169,7 @@ fun AppDrawer(
     val noEmailAppFound = stringResource(R.string.no_email_app_found)
     var showContactDialog by remember { mutableStateOf(false) }
 
+
     ModalNavigationDrawer(
         drawerContent = {
             ModalDrawerSheet {
