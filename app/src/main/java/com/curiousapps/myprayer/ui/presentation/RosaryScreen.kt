@@ -15,19 +15,37 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.curiousapps.myprayer.R
 import com.curiousapps.myprayer.data.RosaryPrayersItem
+import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
 
 @Composable
 fun RosaryScreen(
     modifier: Modifier = Modifier,
-    viewModel: RosaryViewModel = hiltViewModel(),
+    viewModel: RosaryViewModel? = null,
     onNavigateToPrayer: (Int) -> Unit = {}
 ) {
-    val state by viewModel.state.collectAsState(RosaryViewModel.RosaryState())
+    val resolvedViewModel = viewModel ?: hiltViewModel<RosaryViewModel>()
+    val state by resolvedViewModel.state.collectAsState(RosaryViewModel.RosaryState())
+
+    RosaryScreenContent(
+        state = state,
+        modifier = modifier,
+        onPrayerClick = { index, scrollOffset ->
+            resolvedViewModel.saveListScrollOffset(scrollOffset)
+            onNavigateToPrayer(index)
+        }
+    )
+}
+
+@Composable
+private fun RosaryScreenContent(
+    state: RosaryViewModel.RosaryState,
+    modifier: Modifier = Modifier,
+    onPrayerClick: (index: Int, scrollOffset: Int) -> Unit = { _, _ -> }
+) {
     val displayPrayerList = state.displayPrayers
     val isLoading = state.isLoading
     val error = state.error
@@ -56,8 +74,7 @@ fun RosaryScreen(
                         prayer = prayer,
                         stepNumber = index + 1,
                         onClick = {
-                            viewModel.saveListScrollOffset(listScrollState.value)
-                            onNavigateToPrayer(index)
+                            onPrayerClick(index, listScrollState.value)
                         }
                     )
                     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
@@ -85,6 +102,24 @@ private fun RosaryPrayerRow(
             text = "$stepNumber. ${prayer.prayerName}",
             style = MaterialTheme.typography.titleMedium,
             color = Color.DarkGray
+        )
+    }
+}
+
+@Preview(showBackground = true, widthDp = 360, heightDp = 640)
+@Composable
+private fun RosaryScreenPreview() {
+    MyPrayerTheme {
+        RosaryScreenContent(
+            state = RosaryViewModel.RosaryState(
+                displayPrayers = listOf(
+                    RosaryPrayersItem(1, "Sign of the Cross", "", ""),
+                    RosaryPrayersItem(2, "Apostle's Creed", "", ""),
+                    RosaryPrayersItem(3, "Lord's Prayer", "", ""),
+                    RosaryPrayersItem(4, "Hail Mary", "", ""),
+                    RosaryPrayersItem(5, "Glory Be", "", "")
+                )
+            )
         )
     }
 }

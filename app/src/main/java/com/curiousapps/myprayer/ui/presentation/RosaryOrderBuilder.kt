@@ -37,7 +37,7 @@ class RosaryOrderBuilder @Inject constructor() {
                             mysterySetName = mysterySet.name,
                             mysteryName = mystery.name
                         ),
-                        prayerText = "${mystery.scripture}\n${mystery.meditation}",
+                        prayerText = "${mystery.scripture} ${mystery.meditation}",
                         youtubeUrl = mystery.youtubeUrl.orEmpty()
                     )
                 )
@@ -62,7 +62,7 @@ class RosaryOrderBuilder @Inject constructor() {
     ): String {
         val ordinal = decadeNumber.toOrdinal()
         val setDisplayName = mysterySetName.toSingularMysterySetName()
-        return "$ordinal $setDisplayName:\n$mysteryName"
+        return "$ordinal $setDisplayName: $mysteryName"
     }
 
 

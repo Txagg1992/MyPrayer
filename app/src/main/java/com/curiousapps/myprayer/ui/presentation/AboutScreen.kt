@@ -18,12 +18,14 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.tooling.preview.Preview
 import com.curiousapps.myprayer.R
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen12Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen16Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.DIMEN1F
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen20Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen2Dp
+import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
 import com.curiousapps.myprayer.util.PRIVACY_POLICY_URL
 
 private val PyriteFontFamily = FontFamily(Font(R.font.pyrite))
@@ -115,5 +117,13 @@ fun AboutScreen() {
                 )
             }
         }
+    }
+}
+
+@Preview(showBackground = true, widthDp = 360, heightDp = 640)
+@Composable
+private fun AboutScreenPreview() {
+    MyPrayerTheme {
+        AboutScreen()
     }
 }

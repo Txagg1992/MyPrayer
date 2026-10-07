@@ -31,10 +31,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.curiousapps.myprayer.R
 import com.curiousapps.myprayer.data.RosaryPrayersItem
+import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
 
 @Composable
 fun PrayerDetailScreen(
@@ -42,9 +44,14 @@ fun PrayerDetailScreen(
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     prayersOverride: List<RosaryPrayersItem>? = null,
-    viewModel: RosaryViewModel = hiltViewModel()
+    viewModel: RosaryViewModel? = null
 ) {
-    val state by viewModel.state.collectAsState()
+    val state = if (prayersOverride == null) {
+        val resolvedViewModel = viewModel ?: hiltViewModel<RosaryViewModel>()
+        resolvedViewModel.state.collectAsState().value
+    } else {
+        RosaryViewModel.RosaryState(displayPrayers = prayersOverride)
+    }
     val prayers = prayersOverride ?: state.displayPrayers
     var currentIndex by rememberSaveable { mutableIntStateOf(startIndex) }
     val prayer = prayers.getOrNull(currentIndex)
@@ -159,3 +166,29 @@ fun PrayerDetailScreen(
         }
     }
 }
+
+@Preview(showBackground = true, widthDp = 360, heightDp = 640)
+@Composable
+private fun PrayerDetailScreenPreview() {
+    MyPrayerTheme {
+        PrayerDetailScreen(
+            startIndex = 0,
+            onNavigateBack = {},
+            prayersOverride = listOf(
+                RosaryPrayersItem(
+                    id = 1,
+                    prayerName = "Hail Mary",
+                    prayerText = "Hail Mary, full of grace, the Lord is with thee. Blessed art thou amongst women, and blessed is the fruit of thy womb, Jesus.",
+                    youtubeUrl = ""
+                ),
+                RosaryPrayersItem(
+                    id = 2,
+                    prayerName = "Lord's Prayer",
+                    prayerText = "Our Father, who art in heaven, hallowed be thy name. Thy kingdom come, thy will be done, on earth as it is in heaven. Give us this day our daily bread, and forgive us our trespasses, as we forgive those who trespass against us. And lead us not into temptation, but deliver us from evil.",
+                    youtubeUrl = ""
+                )
+            )
+        )
+    }
+}
+

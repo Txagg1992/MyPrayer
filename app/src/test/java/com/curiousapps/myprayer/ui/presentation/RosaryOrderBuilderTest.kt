@@ -4,6 +4,7 @@ import com.curiousapps.myprayer.data.RosaryMystery
 import com.curiousapps.myprayer.data.RosaryMysterySet
 import com.curiousapps.myprayer.data.RosaryPrayersItem
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -60,7 +61,7 @@ class RosaryOrderBuilderTest {
         assertEquals(53, order.count { it.prayerName == "Hail Mary" })
         assertEquals(6, order.count { it.prayerName == "Glory Be" })
         assertEquals(5, order.count { it.prayerName == "Fatima Prayer" })
-        assertEquals(5, order.count { it.prayerName.contains(" Joyful Mystery: ") })
+        assertEquals(5, order.count { it.prayerName.contains("Joyful Mystery: ") })
     }
 
     private fun basePrayerList(): List<RosaryPrayersItem> {
