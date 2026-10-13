@@ -8,6 +8,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.curiousapps.myprayer.R
+import com.curiousapps.myprayer.ui.theme.AppDimens.SIX_FORTY
+import com.curiousapps.myprayer.ui.theme.AppDimens.THREE_SIXTY
 import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
 
 @Composable
@@ -20,7 +22,7 @@ fun LaunchScreen() {
     )
 }
 
-@Preview(showBackground = true, widthDp = 360, heightDp = 640)
+@Preview(showBackground = true, widthDp = THREE_SIXTY, heightDp = SIX_FORTY)
 @Composable
 private fun LaunchScreenPreview() {
     MyPrayerTheme {

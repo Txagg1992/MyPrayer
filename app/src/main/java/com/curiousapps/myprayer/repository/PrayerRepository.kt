@@ -30,10 +30,10 @@ class PrayerRepositoryImpl @Inject constructor(
 
     override suspend fun getMysterySetForDay(dayOfWeek: DayOfWeek): RosaryMysterySet? {
         val expectedSetName = when (dayOfWeek) {
-            DayOfWeek.MONDAY, DayOfWeek.SATURDAY -> "Joyful Mysteries"
-            DayOfWeek.TUESDAY, DayOfWeek.FRIDAY -> "Sorrowful Mysteries"
-            DayOfWeek.WEDNESDAY, DayOfWeek.SUNDAY -> "Glorious Mysteries"
-            DayOfWeek.THURSDAY -> "Luminous Mysteries"
+            DayOfWeek.MONDAY, DayOfWeek.SATURDAY -> context.getString(R.string.joyful_mysteries)
+            DayOfWeek.TUESDAY, DayOfWeek.FRIDAY -> context.getString(R.string.sorrowful_mysteries)
+            DayOfWeek.WEDNESDAY, DayOfWeek.SUNDAY -> context.getString(R.string.glorious_mysteries)
+            DayOfWeek.THURSDAY -> context.getString(R.string.luminous_mysteries)
         }
         return rosaryMysterySets.firstOrNull { it.name == expectedSetName }
     }
@@ -44,7 +44,8 @@ class PrayerRepositoryImpl @Inject constructor(
             val jsonString = inputStream.bufferedReader().use { it.readText() }
             Gson().fromJson(jsonString, RosaryPrayers::class.java)
         } catch (exception: Exception) {
-            Timber.tag(TAG).e(exception, "Failed to parse rosary_prayers.json")
+            Timber.tag(TAG).e(exception,
+                context.getString(R.string.failed_to_parse_rosary_prayers_json))
             emptyList()
         }
     }
@@ -55,7 +56,8 @@ class PrayerRepositoryImpl @Inject constructor(
             val jsonString = inputStream.bufferedReader().use { it.readText() }
             Gson().fromJson(jsonString, RosaryMysteriesResponse::class.java).mysterySets
         } catch (exception: Exception) {
-            Timber.tag(TAG).e(exception, "Failed to parse rosary_mysteries.json")
+            Timber.tag(TAG).e(exception,
+                context.getString(R.string.failed_to_parse_rosary_mysteries_json))
             emptyList()
         }
     }

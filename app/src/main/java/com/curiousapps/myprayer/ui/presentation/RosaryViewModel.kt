@@ -1,11 +1,15 @@
 package com.curiousapps.myprayer.ui.presentation
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.curiousapps.myprayer.R
 import com.curiousapps.myprayer.data.RosaryPrayersItem
 import com.curiousapps.myprayer.repository.PrayerRepository
 import com.curiousapps.myprayer.repository.SaintRepository
+import com.curiousapps.myprayer.ui.theme.AppDimens.ZERO
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.time.LocalDate
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,7 +22,8 @@ import javax.inject.Inject
 class RosaryViewModel @Inject constructor(
     private val repository: PrayerRepository,
     private val saintRepository: SaintRepository,
-    private val rosaryOrderBuilder: RosaryOrderBuilder
+    private val rosaryOrderBuilder: RosaryOrderBuilder,
+    @param:ApplicationContext private val context: Context
 ): ViewModel() {
 
     private val _state = MutableStateFlow(RosaryState())
@@ -49,7 +54,7 @@ class RosaryViewModel @Inject constructor(
                     saintPrayers = saints,
                     todaysMysterySetName = todaysMysterySet?.name,
                     isLoading = false,
-                    error = "No Prayers Found"
+                    error = context.getString(R.string.no_prayers_found)
                 )
             } else {
                 _state.value = _state.value.copy(
@@ -74,7 +79,7 @@ class RosaryViewModel @Inject constructor(
         val displayPrayers: List<RosaryPrayersItem> = emptyList(),
         val saintPrayers: List<RosaryPrayersItem> = emptyList(),
         val todaysMysterySetName: String? = null,
-        val lastListScrollOffset: Int = 0,
+        val lastListScrollOffset: Int = ZERO,
         val isLoading: Boolean = false,
         val error: String? = null
     )

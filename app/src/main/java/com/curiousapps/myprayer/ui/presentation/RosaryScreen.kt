@@ -15,10 +15,18 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.curiousapps.myprayer.R
 import com.curiousapps.myprayer.data.RosaryPrayersItem
+import com.curiousapps.myprayer.ui.theme.AppDimens.ONE
+import com.curiousapps.myprayer.ui.theme.AppDimens.SIX_FORTY
+import com.curiousapps.myprayer.ui.theme.AppDimens.THREE_SIXTY
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen12Dp
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen16Dp
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen32Dp
 import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
 
 @Composable
@@ -61,23 +69,23 @@ private fun RosaryScreenContent(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp)
-            .padding(bottom = 32.dp)
+            .padding(dimen16Dp)
+            .padding(bottom = dimen32Dp)
             .verticalScroll(listScrollState)
     ) {
         when {
-            isLoading -> Text(text = "Loading prayers...")
+            isLoading -> Text(text = stringResource(R.string.loading_prayers))
             error != null -> Text(text = "Error: $error")
             else -> {
                 displayPrayerList.forEachIndexed { index, prayer ->
                     RosaryPrayerRow(
                         prayer = prayer,
-                        stepNumber = index + 1,
+                        stepNumber = index + ONE,
                         onClick = {
                             onPrayerClick(index, listScrollState.value)
                         }
                     )
-                    HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+                    HorizontalDivider(modifier = Modifier.padding(horizontal = dimen16Dp))
                 }
             }
         }
@@ -96,7 +104,7 @@ private fun RosaryPrayerRow(
         modifier = modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
-            .padding(vertical = 12.dp, horizontal = 16.dp)
+            .padding(vertical = dimen12Dp, horizontal = dimen16Dp)
     ) {
         Text(
             text = "$stepNumber. ${prayer.prayerName}",
@@ -106,7 +114,7 @@ private fun RosaryPrayerRow(
     }
 }
 
-@Preview(showBackground = true, widthDp = 360, heightDp = 640)
+@Preview(showBackground = true, widthDp = THREE_SIXTY, heightDp = SIX_FORTY)
 @Composable
 private fun RosaryScreenPreview() {
     MyPrayerTheme {

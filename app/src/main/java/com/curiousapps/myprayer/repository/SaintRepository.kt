@@ -29,7 +29,8 @@ class SaintRepositoryImpl @Inject constructor(
             val jsonString = inputStream.bufferedReader().use { it.readText() }
             Gson().fromJson(jsonString, SaintPrayers::class.java)
         } catch (exception: Exception) {
-            Timber.tag(TAG).e(exception, "Failed to parse saint_prayers.json")
+            Timber.tag(TAG).e(exception,
+                context.getString(R.string.failed_to_parse_saint_prayers_json))
             emptyList()
         }
     }

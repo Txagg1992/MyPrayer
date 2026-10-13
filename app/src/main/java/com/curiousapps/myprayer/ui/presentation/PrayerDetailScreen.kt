@@ -30,12 +30,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.curiousapps.myprayer.R
 import com.curiousapps.myprayer.data.RosaryPrayersItem
+import com.curiousapps.myprayer.ui.theme.AppDimens
+import com.curiousapps.myprayer.ui.theme.AppDimens.ONE
+import com.curiousapps.myprayer.ui.theme.AppDimens.SIX_FORTY
+import com.curiousapps.myprayer.ui.theme.AppDimens.THREE_SIXTY
+import com.curiousapps.myprayer.ui.theme.AppDimens.ZERO
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen16Dp
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen24Dp
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen8Dp
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen48Dp
 import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
 
 @Composable
@@ -63,33 +73,33 @@ fun PrayerDetailScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(dimen8Dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(onClick = onNavigateBack) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBackIos,
-                    contentDescription = "Back to list",
+                    contentDescription = stringResource(R.string.back_to_list),
                     tint = appBarContentColor
                 )
             }
             Text(
-                text = prayer?.prayerName ?: "",
+                text = prayer?.prayerName ?: stringResource(R.string.blank_space),
                 style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.weight(1f),
                 color = appBarContentColor
             )
-            Spacer(modifier = Modifier.size(48.dp))
+            Spacer(modifier = Modifier.size(dimen48Dp))
         }
 
         Image(
             painter = painterResource(
                 id = when {
                     prayer == null -> R.drawable.celtic_cross
-                    prayer.prayerName == "Hail Mary" -> R.drawable.crucifix1
-                    prayer.prayerName == "Lord's Prayer" -> R.drawable.cross_of_jesus
-                    prayer.id < 0 -> R.drawable.easter_cross
+                    prayer.prayerName == stringResource(R.string.hail_mary) -> R.drawable.crucifix1
+                    prayer.prayerName == stringResource(R.string.lord_s_prayer) -> R.drawable.cross_of_jesus
+                    prayer.id < ZERO -> R.drawable.easter_cross
                     else -> R.drawable.celtic_cross
                 }
             ),
@@ -98,7 +108,7 @@ fun PrayerDetailScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(120.dp)
-                .padding(horizontal = 24.dp, vertical = 8.dp)
+                .padding(horizontal = dimen24Dp, vertical = dimen8Dp)
         )
 
         Column(
@@ -106,7 +116,7 @@ fun PrayerDetailScreen(
                 .weight(1f)
                 .fillMaxWidth()
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = 24.dp, vertical = 16.dp),
+                .padding(horizontal = dimen24Dp, vertical = dimen16Dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             when {
@@ -123,7 +133,7 @@ fun PrayerDetailScreen(
                         Text(
                             text = prayer.youtubeUrl,
                             style = MaterialTheme.typography.bodySmall,
-                            modifier = Modifier.padding(top = 8.dp),
+                            modifier = Modifier.padding(top = dimen8Dp),
                             color = Color.DarkGray
                         )
                     }
@@ -134,40 +144,40 @@ fun PrayerDetailScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(dimen16Dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Button(
-                onClick = { if (currentIndex > 0) currentIndex-- },
-                enabled = currentIndex > 0,
+                onClick = { if (currentIndex > ZERO) currentIndex-- },
+                enabled = currentIndex > ZERO,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(end = 8.dp),
+                    .padding(end = dimen8Dp),
                 colors = androidx.compose.material3.ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             ) {
-                Text(text = "Previous")
+                Text(text = stringResource(R.string.previous))
             }
             Button(
-                onClick = { if (currentIndex < prayers.size - 1) currentIndex++ },
-                enabled = currentIndex < prayers.size - 1,
+                onClick = { if (currentIndex < prayers.size - ONE) currentIndex++ },
+                enabled = currentIndex < prayers.size - ONE,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(start = 8.dp),
+                    .padding(start = dimen8Dp),
                 colors = androidx.compose.material3.ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             ) {
-                Text(text = "Next")
+                Text(text = stringResource(R.string.next))
             }
         }
     }
 }
 
-@Preview(showBackground = true, widthDp = 360, heightDp = 640)
+@Preview(showBackground = true, widthDp = THREE_SIXTY, heightDp = SIX_FORTY)
 @Composable
 private fun PrayerDetailScreenPreview() {
     MyPrayerTheme {

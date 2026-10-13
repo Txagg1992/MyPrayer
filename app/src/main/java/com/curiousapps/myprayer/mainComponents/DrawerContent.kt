@@ -50,7 +50,7 @@ fun DrawerContent(
             .padding(horizontal = dimen16Dp)
             .verticalScroll(rememberScrollState())
     ) {
-        Spacer(Modifier.height(12.dp))
+        Spacer(Modifier.height(dimen12Dp))
         Text(stringResource(R.string.my_prayers), modifier = Modifier.padding(dimen16Dp), style = MaterialTheme.typography.titleLarge)
         HorizontalDivider()
 

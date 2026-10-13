@@ -12,13 +12,13 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
@@ -49,7 +49,7 @@ import com.curiousapps.myprayer.ui.presentation.LaunchScreen
 import com.curiousapps.myprayer.ui.presentation.PrayerDetailScreen
 import com.curiousapps.myprayer.ui.presentation.RosaryScreen
 import com.curiousapps.myprayer.ui.presentation.RosaryViewModel
-import com.curiousapps.myprayer.ui.theme.AppDimens.zero
+import com.curiousapps.myprayer.ui.theme.AppDimens.ZERO
 import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -69,11 +69,11 @@ class MainActivity : ComponentActivity() {
                 AppDrawer(
                     onPrayerClick = { prayerName ->
                         val rosaryIndex = state.displayPrayers.indexOfFirst { it.prayerName == prayerName }
-                        if (rosaryIndex >= zero) {
+                        if (rosaryIndex >= ZERO) {
                             navController.navigate("prayer_detail/$rosaryIndex")
                         } else {
                             val saintIndex = state.saintPrayers.indexOfFirst { it.prayerName == prayerName }
-                            if (saintIndex >= zero) {
+                            if (saintIndex >= ZERO) {
                                 navController.navigate("saint_prayer_detail/$saintIndex")
                             }
                         }
@@ -123,7 +123,7 @@ class MainActivity : ComponentActivity() {
                                 navArgument("prayerIndex") { type = NavType.IntType }
                             )
                         ) { backStackEntry ->
-                            val index = backStackEntry.arguments?.getInt("prayerIndex") ?: zero
+                            val index = backStackEntry.arguments?.getInt("prayerIndex") ?: ZERO
                             PrayerDetailScreen(
                                 startIndex = index,
                                 onNavigateBack = { navController.popBackStack() }
@@ -135,7 +135,7 @@ class MainActivity : ComponentActivity() {
                                 navArgument("prayerIndex") { type = NavType.IntType }
                             )
                         ) { backStackEntry ->
-                            val index = backStackEntry.arguments?.getInt("prayerIndex") ?: zero
+                            val index = backStackEntry.arguments?.getInt("prayerIndex") ?: ZERO
                             PrayerDetailScreen(
                                 startIndex = index,
                                 prayersOverride = state.saintPrayers,
