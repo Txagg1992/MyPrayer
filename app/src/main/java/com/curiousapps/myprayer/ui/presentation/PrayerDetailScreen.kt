@@ -23,12 +23,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -37,16 +40,18 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.curiousapps.myprayer.R
 import com.curiousapps.myprayer.data.RosaryPrayersItem
-import com.curiousapps.myprayer.ui.theme.AppDimens
 import com.curiousapps.myprayer.ui.theme.AppDimens.ONE
 import com.curiousapps.myprayer.ui.theme.AppDimens.SIX_FORTY
 import com.curiousapps.myprayer.ui.theme.AppDimens.THREE_SIXTY
 import com.curiousapps.myprayer.ui.theme.AppDimens.ZERO
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen16Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen24Dp
-import com.curiousapps.myprayer.ui.theme.AppDimens.dimen8Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen48Dp
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen8Dp
 import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun PrayerDetailScreen(
@@ -56,6 +61,8 @@ fun PrayerDetailScreen(
     prayersOverride: List<RosaryPrayersItem>? = null,
     viewModel: RosaryViewModel? = null
 ) {
+    val hapticFeedback = LocalHapticFeedback.current
+    val coroutineScope = rememberCoroutineScope()
     val state = if (prayersOverride == null) {
         val resolvedViewModel = viewModel ?: hiltViewModel<RosaryViewModel>()
         resolvedViewModel.state.collectAsState().value
@@ -156,7 +163,16 @@ fun PrayerDetailScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Button(
-                onClick = { if (currentIndex > ZERO) currentIndex-- },
+                onClick = {
+                    if (currentIndex > ZERO) {
+                        coroutineScope.launch {
+                            hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                            delay(100.milliseconds)
+                            hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                        }
+                        currentIndex--
+                    }
+                },
                 enabled = currentIndex > ZERO,
                 modifier = Modifier
                     .weight(1f)
@@ -169,7 +185,12 @@ fun PrayerDetailScreen(
                 Text(text = stringResource(R.string.previous))
             }
             Button(
-                onClick = { if (currentIndex < prayers.size - ONE) currentIndex++ },
+                onClick = {
+                    if (currentIndex < prayers.size - ONE) {
+                        hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                        currentIndex++
+                    }
+                },
                 enabled = currentIndex < prayers.size - ONE,
                 modifier = Modifier
                     .weight(1f)
