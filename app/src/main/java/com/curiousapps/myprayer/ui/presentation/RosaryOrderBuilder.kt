@@ -2,6 +2,7 @@ package com.curiousapps.myprayer.ui.presentation
 
 import android.content.Context
 import com.curiousapps.myprayer.R
+import com.curiousapps.myprayer.data.PrayerAudio
 import com.curiousapps.myprayer.data.RosaryMysterySet
 import com.curiousapps.myprayer.data.RosaryPrayersItem
 import com.curiousapps.myprayer.data.mapper.toOrdinal
@@ -47,7 +48,7 @@ class RosaryOrderBuilder @Inject constructor(
                             mysteryName = mystery.name
                         ),
                         prayerText = "${mystery.scripture} ${mystery.meditation}",
-                        youtubeUrl = mystery.youtubeUrl.orEmpty()
+                        audio = mystery.audioFile
                     )
                 )
             }

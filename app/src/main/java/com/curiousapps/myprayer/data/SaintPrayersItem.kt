@@ -4,5 +4,5 @@ data class SaintPrayersItem(
     val id: Int,
     val prayerName: String,
     val prayerText: String,
-    val youtubeUrl: String
+    val audioFile: PrayerAudio = PrayerAudio()
 )

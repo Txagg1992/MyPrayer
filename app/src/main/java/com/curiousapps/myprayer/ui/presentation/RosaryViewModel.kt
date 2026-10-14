@@ -3,6 +3,7 @@ package com.curiousapps.myprayer.ui.presentation
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.curiousapps.myprayer.data.PrayerAudio
 import com.curiousapps.myprayer.R
 import com.curiousapps.myprayer.data.RosaryPrayersItem
 import com.curiousapps.myprayer.repository.PrayerRepository
@@ -43,7 +44,7 @@ class RosaryViewModel @Inject constructor(
                     id = saint.id,
                     prayerName = saint.prayerName,
                     prayerText = saint.prayerText,
-                    youtubeUrl = saint.youtubeUrl
+                    audio = saint.audioFile
                 )
             }
             val todaysMysterySet = repository.getMysterySetForDay(LocalDate.now().dayOfWeek)

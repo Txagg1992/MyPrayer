@@ -1,5 +1,6 @@
 package com.curiousapps.myprayer.ui.presentation
 
+import com.curiousapps.myprayer.data.PrayerAudio
 import com.curiousapps.myprayer.data.RosaryMystery
 import com.curiousapps.myprayer.data.RosaryMysterySet
 import com.curiousapps.myprayer.data.RosaryPrayersItem
@@ -87,7 +88,7 @@ class RosaryOrderBuilderTest {
                     id = index,
                     name = "Mystery $index",
                     scripture = "Scripture $index",
-                    youtubeUrl = null,
+                    audioFile = PrayerAudio(),
                     meditation = "Meditation $index"
                 )
             }
@@ -98,8 +99,7 @@ class RosaryOrderBuilderTest {
         return RosaryPrayersItem(
             id = id,
             prayerName = name,
-            prayerText = "$name text",
-            youtubeUrl = ""
+            prayerText = "$name text"
         )
     }
 }

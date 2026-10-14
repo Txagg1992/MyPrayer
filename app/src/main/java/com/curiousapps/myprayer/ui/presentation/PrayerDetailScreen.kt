@@ -129,9 +129,17 @@ fun PrayerDetailScreen(
                         textAlign = TextAlign.Center,
                         color = Color.DarkGray
                     )
-                    if (prayer.youtubeUrl.isNotBlank()) {
+                    if (prayer.audio.male.isNotBlank()) {
                         Text(
-                            text = prayer.youtubeUrl,
+                            text = "Male Audio: ${prayer.audio.male}",
+                            style = MaterialTheme.typography.bodySmall,
+                            modifier = Modifier.padding(top = dimen8Dp),
+                            color = Color.DarkGray
+                        )
+                    }
+                    if (prayer.audio.female.isNotBlank()) {
+                        Text(
+                            text = "Female Audio: ${prayer.audio.female}",
                             style = MaterialTheme.typography.bodySmall,
                             modifier = Modifier.padding(top = dimen8Dp),
                             color = Color.DarkGray
@@ -189,16 +197,13 @@ private fun PrayerDetailScreenPreview() {
                     id = 1,
                     prayerName = "Hail Mary",
                     prayerText = "Hail Mary, full of grace, the Lord is with thee. Blessed art thou amongst women, and blessed is the fruit of thy womb, Jesus.",
-                    youtubeUrl = ""
                 ),
                 RosaryPrayersItem(
                     id = 2,
                     prayerName = "Lord's Prayer",
                     prayerText = "Our Father, who art in heaven, hallowed be thy name. Thy kingdom come, thy will be done, on earth as it is in heaven. Give us this day our daily bread, and forgive us our trespasses, as we forgive those who trespass against us. And lead us not into temptation, but deliver us from evil.",
-                    youtubeUrl = ""
                 )
             )
         )
     }
 }
-

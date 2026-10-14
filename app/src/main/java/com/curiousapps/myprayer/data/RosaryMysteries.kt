@@ -15,7 +15,6 @@ data class RosaryMystery(
     val id: Int,
     val name: String,
     val scripture: String,
-    val youtubeUrl: String?,
+    val audioFile: PrayerAudio = PrayerAudio(),
     val meditation: String
 )
-

@@ -121,11 +121,11 @@ private fun RosaryScreenPreview() {
         RosaryScreenContent(
             state = RosaryViewModel.RosaryState(
                 displayPrayers = listOf(
-                    RosaryPrayersItem(1, "Sign of the Cross", "", ""),
-                    RosaryPrayersItem(2, "Apostle's Creed", "", ""),
-                    RosaryPrayersItem(3, "Lord's Prayer", "", ""),
-                    RosaryPrayersItem(4, "Hail Mary", "", ""),
-                    RosaryPrayersItem(5, "Glory Be", "", "")
+                    RosaryPrayersItem(1, "Sign of the Cross", ""),
+                    RosaryPrayersItem(2, "Apostle's Creed", ""),
+                    RosaryPrayersItem(3, "Lord's Prayer", ""),
+                    RosaryPrayersItem(4, "Hail Mary", ""),
+                    RosaryPrayersItem(5, "Glory Be", "")
                 )
             )
         )

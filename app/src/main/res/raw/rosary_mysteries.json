@@ -9,35 +9,50 @@
           "id": 1,
           "name": "The Annunciation",
           "scripture": "Luke 1:28",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "He came to her and said, 'Hail, full of grace, the Lord is with you'."
         },
         {
           "id": 2,
           "name": "The Visitation",
           "scripture": "Luke 1:41-42",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "When Elizabeth heard the greeting of Mary, the child leaped in her womb; and Elizabeth was filled with the Holy Spirit and she exclaimed with a loud cry, 'Blessed are you among women, and blessed is the fruit of your womb!'"
         },
         {
           "id": 3,
           "name": "The Nativity",
           "scripture": "Luke 2:7",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "Mary 'gave birth to her first-born son and wrapped him in swaddling clothes and laid him in a manger'."
         },
         {
           "id": 4,
           "name": "The Presentation",
           "scripture": "Luke 2:22",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "When the time came for their purification according to the law of Moses, they brought him up to Jerusalem to present him the Lord."
         },
         {
           "id": 5,
           "name": "The Finding in the Temple",
           "scripture": "Luke 2:46-47",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "After three days they found him in the temple, sitting among the teachers, listening to them and asking them questions; and all who heard him were amazed at his understanding and his answers."
         }
       ]
@@ -51,35 +66,50 @@
           "id": 1,
           "name": "The Agony in the Garden",
           "scripture": "Matthew 26:41",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "Watch and pray that you may not enter into temptation; the spirit indeed is willing, but the flesh is weak.'"
         },
         {
           "id": 2,
           "name": "The Scourging at the Pillar",
           "scripture": "Matthew 27:24, 26",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "Pilot said 'I am innocent of this man's blood... and having scourged Jesus, delivered him to be crucified."
         },
         {
           "id": 3,
           "name": "The Crowning with Thorns",
           "scripture": "Matthew 27:28-29",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "The stripped him and put a scarlet robe upon him and plaiting a crown of thorns, they put it on his head, and put a reed in his right hand."
         },
         {
           "id": 4,
           "name": "The Carrying of the Cross",
           "scripture": "John 19:17",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "So they took Jesus, and he went out, bearing his own cross, to the place called the place of the skull."
         },
         {
           "id": 5,
           "name": "The Crucifixion",
           "scripture": "John 19:25",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "But standing by the cross of Jesus were his mother, and his mother's sister, Mary the wife of Clopas, and Mary Magdalene."
         }
       ]
@@ -93,35 +123,50 @@
           "id": 1,
           "name": "The Resurrection",
           "scripture": "Mark 16:5-6",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "Entering the tomb, they saw a young man and they were amazed. He said to them, 'Do not be amazed; you seek Jesus of Nazareth, who was crucified. He has risen, he is not here."
         },
         {
           "id": 2,
           "name": "The Ascension",
           "scripture": "Mark 16:19",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "After the Lord Jesus had spoken to them, he was taken up into heaven and he sat at the right hand of God."
         },
         {
           "id": 3,
           "name": "The Descent of the Holy Spirit",
           "scripture": "Acts 2:3",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "There appeared to them tongues as of fire, distributed and resting on each of them."
         },
         {
           "id": 4,
           "name": "The Assumption",
           "scripture": "Song 2:10-11",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "My beloved speaks... to me: Arise my love, my dove, my fair one, come and away for the winter is past, the rain is over and gone."
         },
         {
           "id": 5,
           "name": "The Coronation of Mary",
           "scripture": "Revelation 12:1",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "A great sign appeared in heaven, a woman clothed with the sun, with the moon under her feet, and on her head a crown of 12 stars."
         }
       ]
@@ -135,35 +180,50 @@
           "id": 1,
           "name": "The Baptism of Jesus",
           "scripture": "Matthew 3:16-17",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "When Jesus was baptized, he went up immediately from the water, and behold, the heavens were opened and he saw the Spirit of God descending like a dove and behold, a voice from heaven saying 'This is my beloved Son, with whom I am well pleased.'"
         },
         {
           "id": 2,
           "name": "The Wedding Feast at Cana",
           "scripture": "John 2:5",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "His mother said to the servants, 'Do whatever he tells you.'"
         },
         {
           "id": 3,
           "name": "The Preaching of the Kingdom",
           "scripture": "Mark 1:15",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "The time is fulfilled, and the kingdom of God is at hand; repent, and believe in the gospel."
         },
         {
           "id": 4,
           "name": "The Transfiguration",
           "scripture": "Matthew 17:2",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "Jesus is transfigured before His disciples, and his face shown like the son, and his garments became white as light."
         },
         {
           "id": 5,
           "name": "The Institution of the Eucharist",
           "scripture": "Mark 14:22-23",
-          "youtubeUrl": null,
+          "audioFile": {
+          "male": "",
+          "female": ""
+        },
           "meditation": "[Jesus] took the bread, and blessed, and broke it, and gave it to them, and said, 'Take; this is my body.' [Jesus] took a chalice, and when he had given thanks he have it to them, and they drank of it."
         }
       ]
