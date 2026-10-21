@@ -27,6 +27,7 @@ object AppDimens {
     const val  FIVE = 5
     const val  TEN = 10
     const val THREE_SIXTY = 360
+    const val ONE_HUNDRED = 100
     const val SIX_FORTY = 640
     const val FIVE_K = 5000
 
