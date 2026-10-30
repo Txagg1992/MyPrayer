@@ -2,6 +2,7 @@ package com.curiousapps.myprayer
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
@@ -10,6 +11,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.AlertDialog
@@ -35,8 +37,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -163,6 +167,7 @@ fun AppDrawer(
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
     val supportEmail = stringResource(R.string.support_email_address)
     val contactEmailSubject = stringResource(R.string.contact_email_subject)
     val contactEmailChooserTitle = stringResource(R.string.contact_email_chooser_title)
@@ -171,7 +176,9 @@ fun AppDrawer(
 
     ModalNavigationDrawer(
         drawerContent = {
-            ModalDrawerSheet {
+            ModalDrawerSheet(
+                modifier = Modifier.widthIn(max = if (isLandscape) 480.dp else 360.dp)
+            ) {
                 DrawerContent(
                     onPrayerClick = { name ->
                         scope.launch { drawerState.close() }

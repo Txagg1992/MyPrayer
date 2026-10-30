@@ -2,6 +2,7 @@ package com.curiousapps.myprayer.ui.presentation
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -35,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.graphics.graphicsLayer
@@ -82,6 +84,7 @@ fun PrayerDetailScreen(
     val prayers = prayersOverride ?: state.displayPrayers
     var currentIndex by rememberSaveable { mutableIntStateOf(startIndex) }
     val appBarContentColor = Color.DarkGray
+    val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     GradientBackground(primaryColor = Color.LightGray)
 
@@ -124,55 +127,111 @@ fun PrayerDetailScreen(
                 prayersOverride == null && state.isLoading -> CircularProgressIndicator()
                 prayersOverride == null && state.error != null -> Text(text = "Error: ${state.error}")
                 prayer != null -> {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Image(
-                            painter = painterResource(
-                                id = when {
-                                    prayer.prayerName == stringResource(R.string.hail_mary) -> R.drawable.crucifix1
-                                    prayer.prayerName == stringResource(R.string.lord_s_prayer) -> R.drawable.cross_of_jesus
-                                    prayer.id < ZERO -> R.drawable.easter_cross
-                                    else -> R.drawable.celtic_cross
+                    if (isLandscape) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(horizontal = dimen24Dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Image(
+                                painter = painterResource(
+                                    id = when {
+                                        prayer.prayerName == stringResource(R.string.hail_mary) -> R.drawable.crucifix1
+                                        prayer.prayerName == stringResource(R.string.lord_s_prayer) -> R.drawable.cross_of_jesus
+                                        prayer.id < ZERO -> R.drawable.easter_cross
+                                        else -> R.drawable.celtic_cross
+                                    }
+                                ),
+                                contentDescription = null,
+                                contentScale = ContentScale.Fit,
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .height(220.dp)
+                                    .padding(end = dimen16Dp)
+                            )
+                            Column(
+                                modifier = Modifier
+                                    .weight(1.4f)
+                                    .fillMaxSize()
+                                    .verticalScroll(rememberScrollState()),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = prayer.prayerText,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    textAlign = TextAlign.Center,
+                                    color = Color.DarkGray
+                                )
+                                if (prayer.audio.male.isNotBlank()) {
+                                    Text(
+                                        text = "Male Audio: ${prayer.audio.male}",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        modifier = Modifier.padding(top = dimen8Dp),
+                                        color = Color.DarkGray
+                                    )
                                 }
-                            ),
-                            contentDescription = null,
-                            contentScale = ContentScale.Fit,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(120.dp)
-                                .padding(horizontal = dimen24Dp, vertical = dimen8Dp)
-                        )
+                                if (prayer.audio.female.isNotBlank()) {
+                                    Text(
+                                        text = "Female Audio: ${prayer.audio.female}",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        modifier = Modifier.padding(top = dimen8Dp),
+                                        color = Color.DarkGray
+                                    )
+                                }
+                            }
+                        }
+                    } else {
                         Column(
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxWidth()
-                                .verticalScroll(rememberScrollState())
-                                .padding(horizontal = dimen24Dp, vertical = dimen16Dp),
+                            modifier = Modifier.fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text(
-                                text = prayer.prayerText,
-                                style = MaterialTheme.typography.bodyLarge,
-                                textAlign = TextAlign.Center,
-                                color = Color.DarkGray
+                            Image(
+                                painter = painterResource(
+                                    id = when {
+                                        prayer.prayerName == stringResource(R.string.hail_mary) -> R.drawable.crucifix1
+                                        prayer.prayerName == stringResource(R.string.lord_s_prayer) -> R.drawable.cross_of_jesus
+                                        prayer.id < ZERO -> R.drawable.easter_cross
+                                        else -> R.drawable.celtic_cross
+                                    }
+                                ),
+                                contentDescription = null,
+                                contentScale = ContentScale.Fit,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(120.dp)
+                                    .padding(horizontal = dimen24Dp, vertical = dimen8Dp)
                             )
-                            if (prayer.audio.male.isNotBlank()) {
+                            Column(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxWidth()
+                                    .verticalScroll(rememberScrollState())
+                                    .padding(horizontal = dimen24Dp, vertical = dimen16Dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
                                 Text(
-                                    text = "Male Audio: ${prayer.audio.male}",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    modifier = Modifier.padding(top = dimen8Dp),
+                                    text = prayer.prayerText,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    textAlign = TextAlign.Center,
                                     color = Color.DarkGray
                                 )
-                            }
-                            if (prayer.audio.female.isNotBlank()) {
-                                Text(
-                                    text = "Female Audio: ${prayer.audio.female}",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    modifier = Modifier.padding(top = dimen8Dp),
-                                    color = Color.DarkGray
-                                )
+                                if (prayer.audio.male.isNotBlank()) {
+                                    Text(
+                                        text = "Male Audio: ${prayer.audio.male}",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        modifier = Modifier.padding(top = dimen8Dp),
+                                        color = Color.DarkGray
+                                    )
+                                }
+                                if (prayer.audio.female.isNotBlank()) {
+                                    Text(
+                                        text = "Female Audio: ${prayer.audio.female}",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        modifier = Modifier.padding(top = dimen8Dp),
+                                        color = Color.DarkGray
+                                    )
+                                }
                             }
                         }
                     }
