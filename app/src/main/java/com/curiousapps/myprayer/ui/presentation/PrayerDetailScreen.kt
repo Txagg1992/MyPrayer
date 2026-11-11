@@ -163,22 +163,22 @@ fun PrayerDetailScreen(
                                     textAlign = TextAlign.Center,
                                     color = Color.DarkGray
                                 )
-                                if (prayer.audio.male.isNotBlank()) {
-                                    Text(
-                                        text = "Male Audio: ${prayer.audio.male}",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        modifier = Modifier.padding(top = dimen8Dp),
-                                        color = Color.DarkGray
-                                    )
-                                }
-                                if (prayer.audio.female.isNotBlank()) {
-                                    Text(
-                                        text = "Female Audio: ${prayer.audio.female}",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        modifier = Modifier.padding(top = dimen8Dp),
-                                        color = Color.DarkGray
-                                    )
-                                }
+//                                if (prayer.audio.male.isNotBlank()) {
+//                                    Text(
+//                                        text = "Male Audio: ${prayer.audio.male}",
+//                                        style = MaterialTheme.typography.bodySmall,
+//                                        modifier = Modifier.padding(top = dimen8Dp),
+//                                        color = Color.DarkGray
+//                                    )
+//                                }
+//                                if (prayer.audio.female.isNotBlank()) {
+//                                    Text(
+//                                        text = "Female Audio: ${prayer.audio.female}",
+//                                        style = MaterialTheme.typography.bodySmall,
+//                                        modifier = Modifier.padding(top = dimen8Dp),
+//                                        color = Color.DarkGray
+//                                    )
+//                                }
                             }
                         }
                     } else {
@@ -216,22 +216,22 @@ fun PrayerDetailScreen(
                                     textAlign = TextAlign.Center,
                                     color = Color.DarkGray
                                 )
-                                if (prayer.audio.male.isNotBlank()) {
-                                    Text(
-                                        text = "Male Audio: ${prayer.audio.male}",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        modifier = Modifier.padding(top = dimen8Dp),
-                                        color = Color.DarkGray
-                                    )
-                                }
-                                if (prayer.audio.female.isNotBlank()) {
-                                    Text(
-                                        text = "Female Audio: ${prayer.audio.female}",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        modifier = Modifier.padding(top = dimen8Dp),
-                                        color = Color.DarkGray
-                                    )
-                                }
+//                                if (prayer.audio.male.isNotBlank()) {
+//                                    Text(
+//                                        text = "Male Audio: ${prayer.audio.male}",
+//                                        style = MaterialTheme.typography.bodySmall,
+//                                        modifier = Modifier.padding(top = dimen8Dp),
+//                                        color = Color.DarkGray
+//                                    )
+//                                }
+//                                if (prayer.audio.female.isNotBlank()) {
+//                                    Text(
+//                                        text = "Female Audio: ${prayer.audio.female}",
+//                                        style = MaterialTheme.typography.bodySmall,
+//                                        modifier = Modifier.padding(top = dimen8Dp),
+//                                        color = Color.DarkGray
+//                                    )
+//                                }
                             }
                         }
                     }

@@ -5,9 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.curiousapps.myprayer.data.PrayerAudio
 import com.curiousapps.myprayer.R
+import com.curiousapps.myprayer.data.AudioVoice
 import com.curiousapps.myprayer.data.RosaryPrayersItem
 import com.curiousapps.myprayer.repository.PrayerRepository
 import com.curiousapps.myprayer.repository.SaintRepository
+import com.curiousapps.myprayer.repository.SettingsRepository
 import com.curiousapps.myprayer.ui.theme.AppDimens.ZERO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -23,6 +25,7 @@ import javax.inject.Inject
 class RosaryViewModel @Inject constructor(
     private val repository: PrayerRepository,
     private val saintRepository: SaintRepository,
+    private val settingsRepository: SettingsRepository,
     private val rosaryOrderBuilder: RosaryOrderBuilder,
     @param:ApplicationContext private val context: Context
 ): ViewModel() {
@@ -35,6 +38,10 @@ class RosaryViewModel @Inject constructor(
             SharingStarted.WhileSubscribed(5000),
             RosaryState()
         )
+
+    init {
+        loadSettings()
+    }
 
     private fun getRosaryPrayers() {
         viewModelScope.launch {
@@ -75,12 +82,31 @@ class RosaryViewModel @Inject constructor(
         _state.value = _state.value.copy(lastListScrollOffset = offset)
     }
 
+    fun setAudioEnabled(isEnabled: Boolean) {
+        settingsRepository.setAudioEnabled(isEnabled)
+        _state.value = _state.value.copy(audioEnabled = isEnabled)
+    }
+
+    fun setAudioVoice(voice: AudioVoice) {
+        settingsRepository.setAudioVoice(voice)
+        _state.value = _state.value.copy(audioVoice = voice)
+    }
+
+    private fun loadSettings() {
+        _state.value = _state.value.copy(
+            audioEnabled = settingsRepository.isAudioEnabled(),
+            audioVoice = settingsRepository.getAudioVoice()
+        )
+    }
+
     data class RosaryState(
         val prayers: List<RosaryPrayersItem> = emptyList(),
         val displayPrayers: List<RosaryPrayersItem> = emptyList(),
         val saintPrayers: List<RosaryPrayersItem> = emptyList(),
         val todaysMysterySetName: String? = null,
         val lastListScrollOffset: Int = ZERO,
+        val audioEnabled: Boolean = true,
+        val audioVoice: AudioVoice = AudioVoice.MALE,
         val isLoading: Boolean = false,
         val error: String? = null
     )

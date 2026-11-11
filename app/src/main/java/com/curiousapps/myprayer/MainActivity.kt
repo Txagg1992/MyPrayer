@@ -45,6 +45,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.curiousapps.myprayer.mainComponents.DrawerContent
@@ -53,6 +54,7 @@ import com.curiousapps.myprayer.ui.presentation.LaunchScreen
 import com.curiousapps.myprayer.ui.presentation.PrayerDetailScreen
 import com.curiousapps.myprayer.ui.presentation.RosaryScreen
 import com.curiousapps.myprayer.ui.presentation.RosaryViewModel
+import com.curiousapps.myprayer.ui.presentation.SettingsDialog
 import com.curiousapps.myprayer.ui.theme.AppDimens.ZERO
 import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -88,6 +90,11 @@ class MainActivity : ComponentActivity() {
                             launchSingleTop = true
                         }
                     },
+                    onSettingsClick = {
+                        navController.navigate("settings") {
+                            launchSingleTop = true
+                        }
+                    },
                     onRosaryTodayClick = {
                         navController.navigate("rosary_list") {
                             popUpTo("rosary_list") { inclusive = true }
@@ -120,6 +127,19 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("about") {
                             AboutScreen()
+                        }
+                        dialog("settings") {
+                            SettingsDialog(
+                                audioEnabled = state.audioEnabled,
+                                selectedVoice = state.audioVoice,
+                                onAudioEnabledChange = { enabled ->
+                                    viewModel.setAudioEnabled(enabled)
+                                },
+                                onVoiceChange = { voice ->
+                                    viewModel.setAudioVoice(voice)
+                                },
+                                onDismiss = { navController.popBackStack() }
+                            )
                         }
                         composable(
                             route = "prayer_detail/{prayerIndex}",
@@ -160,6 +180,7 @@ fun AppDrawer(
     onPrayerClick: (String) -> Unit = {},
     onHomeClick: () -> Unit = {},
     onRosaryTodayClick: () -> Unit = {},
+    onSettingsClick: () -> Unit = {},
     onAboutClick: () -> Unit = {},
     onExitClick: () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit
@@ -191,6 +212,10 @@ fun AppDrawer(
                     onHomeClick = {
                         scope.launch { drawerState.close() }
                         onHomeClick()
+                    },
+                    onSettingsClick = {
+                        scope.launch { drawerState.close() }
+                        onSettingsClick()
                     },
                     onAboutClick = {
                         scope.launch { drawerState.close() }

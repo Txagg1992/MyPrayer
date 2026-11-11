@@ -10,8 +10,8 @@
           "name": "The Annunciation",
           "scripture": "Luke 1:28",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_annunciation",
+          "female": "elise_annunciation"
         },
           "meditation": "He came to her and said, 'Hail, full of grace, the Lord is with you'."
         },
@@ -20,8 +20,8 @@
           "name": "The Visitation",
           "scripture": "Luke 1:41-42",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_visitation",
+          "female": "elise_visitation"
         },
           "meditation": "When Elizabeth heard the greeting of Mary, the child leaped in her womb; and Elizabeth was filled with the Holy Spirit and she exclaimed with a loud cry, 'Blessed are you among women, and blessed is the fruit of your womb!'"
         },
@@ -30,8 +30,8 @@
           "name": "The Nativity",
           "scripture": "Luke 2:7",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_nativity",
+          "female": "elise_nativity"
         },
           "meditation": "Mary 'gave birth to her first-born son and wrapped him in swaddling clothes and laid him in a manger'."
         },
@@ -40,18 +40,18 @@
           "name": "The Presentation",
           "scripture": "Luke 2:22",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_presentation",
+          "female": "elise_presentation"
         },
-          "meditation": "When the time came for their purification according to the law of Moses, they brought him up to Jerusalem to present him the Lord."
+          "meditation": "When the time came for their purification according to the law of Moses, they brought him up to Jerusalem to present him to the Lord."
         },
         {
           "id": 5,
           "name": "The Finding in the Temple",
           "scripture": "Luke 2:46-47",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_finding_in_the_temple",
+          "female": "elise_finding_in_the_temple"
         },
           "meditation": "After three days they found him in the temple, sitting among the teachers, listening to them and asking them questions; and all who heard him were amazed at his understanding and his answers."
         }
@@ -67,38 +67,38 @@
           "name": "The Agony in the Garden",
           "scripture": "Matthew 26:41",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_agony_in_the_garden",
+          "female": "elise_agony_in_the_garden"
         },
-          "meditation": "Watch and pray that you may not enter into temptation; the spirit indeed is willing, but the flesh is weak.'"
+          "meditation": "Watch and pray that you may not enter into temptation; the spirit indeed is willing, but the flesh is weak."
         },
         {
           "id": 2,
           "name": "The Scourging at the Pillar",
           "scripture": "Matthew 27:24, 26",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_scourging_at_the_pillar",
+          "female": "elise_scourging_at_the_pillar"
         },
-          "meditation": "Pilot said 'I am innocent of this man's blood... and having scourged Jesus, delivered him to be crucified."
+          "meditation": "Pilot said 'I am innocent of this man's blood'... and having scourged Jesus, delivered him to be crucified."
         },
         {
           "id": 3,
           "name": "The Crowning with Thorns",
           "scripture": "Matthew 27:28-29",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_crowning_with_thorns",
+          "female": "elise_crowning_with_thorns"
         },
-          "meditation": "The stripped him and put a scarlet robe upon him and plaiting a crown of thorns, they put it on his head, and put a reed in his right hand."
+          "meditation": "They stripped him and put a scarlet robe upon him, and plaiting a crown of thorns, they put it on his head, and put a reed in his right hand."
         },
         {
           "id": 4,
           "name": "The Carrying of the Cross",
           "scripture": "John 19:17",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_carrying_of_the_cross",
+          "female": "elise_carrying_of_the_cross"
         },
           "meditation": "So they took Jesus, and he went out, bearing his own cross, to the place called the place of the skull."
         },
@@ -107,8 +107,8 @@
           "name": "The Crucifixion",
           "scripture": "John 19:25",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_the_crucifixion",
+          "female": "elise_the_crucifixion"
         },
           "meditation": "But standing by the cross of Jesus were his mother, and his mother's sister, Mary the wife of Clopas, and Mary Magdalene."
         }
@@ -124,8 +124,8 @@
           "name": "The Resurrection",
           "scripture": "Mark 16:5-6",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_resurrection",
+          "female": "elise_resurrection"
         },
           "meditation": "Entering the tomb, they saw a young man and they were amazed. He said to them, 'Do not be amazed; you seek Jesus of Nazareth, who was crucified. He has risen, he is not here."
         },
@@ -134,18 +134,18 @@
           "name": "The Ascension",
           "scripture": "Mark 16:19",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_ascension",
+          "female": "elise_ascension"
         },
-          "meditation": "After the Lord Jesus had spoken to them, he was taken up into heaven and he sat at the right hand of God."
+          "meditation": "So then the Lord Jesus, after he had spoken to them, was taken up into heaven and he sat at the right hand of God."
         },
         {
           "id": 3,
           "name": "The Descent of the Holy Spirit",
           "scripture": "Acts 2:3",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_descent_of_the_holy_spirit",
+          "female": "elise_descent_of_the_holy_spirit"
         },
           "meditation": "There appeared to them tongues as of fire, distributed and resting on each of them."
         },
@@ -154,18 +154,18 @@
           "name": "The Assumption",
           "scripture": "Song 2:10-11",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_assumption",
+          "female": "elise_assumption"
         },
-          "meditation": "My beloved speaks... to me: Arise my love, my dove, my fair one, come and away for the winter is past, the rain is over and gone."
+          "meditation": "My beloved speaks... to me: Arise my love, my dove, my fair one,  and come away for behold the winter is past, the rain is over and gone."
         },
         {
           "id": 5,
           "name": "The Coronation of Mary",
           "scripture": "Revelation 12:1",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_coronation_of_mary",
+          "female": "elise_coronation_of_mary"
         },
           "meditation": "A great sign appeared in heaven, a woman clothed with the sun, with the moon under her feet, and on her head a crown of 12 stars."
         }
@@ -181,8 +181,8 @@
           "name": "The Baptism of Jesus",
           "scripture": "Matthew 3:16-17",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_baptism_of_jesus",
+          "female": "elise_baptism_of_jesus"
         },
           "meditation": "When Jesus was baptized, he went up immediately from the water, and behold, the heavens were opened and he saw the Spirit of God descending like a dove and behold, a voice from heaven saying 'This is my beloved Son, with whom I am well pleased.'"
         },
@@ -191,8 +191,8 @@
           "name": "The Wedding Feast at Cana",
           "scripture": "John 2:5",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_wedding_feast",
+          "female": "elise_wedding_feast"
         },
           "meditation": "His mother said to the servants, 'Do whatever he tells you.'"
         },
@@ -201,8 +201,8 @@
           "name": "The Preaching of the Kingdom",
           "scripture": "Mark 1:15",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_preaching_of_the_kingdom",
+          "female": "elise_preaching_of_the_kingdom"
         },
           "meditation": "The time is fulfilled, and the kingdom of God is at hand; repent, and believe in the gospel."
         },
@@ -211,8 +211,8 @@
           "name": "The Transfiguration",
           "scripture": "Matthew 17:2",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_transfiguration",
+          "female": "elise_transfiguration"
         },
           "meditation": "Jesus is transfigured before His disciples, and his face shown like the son, and his garments became white as light."
         },
@@ -221,10 +221,10 @@
           "name": "The Institution of the Eucharist",
           "scripture": "Mark 14:22-23",
           "audioFile": {
-          "male": "",
-          "female": ""
+          "male": "adam_institution_of_the_eucharist",
+          "female": "elise_institution_of_the_eucharist"
         },
-          "meditation": "[Jesus] took the bread, and blessed, and broke it, and gave it to them, and said, 'Take; this is my body.' [Jesus] took a chalice, and when he had given thanks he have it to them, and they drank of it."
+          "meditation": "[Jesus] took the bread, and blessed, and broke it, and gave it to them, and said, 'Take; this is my body.' [Jesus] took a chalice, and when he had given thanks he gave it to them, and they drank of it."
         }
       ]
     }

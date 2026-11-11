@@ -17,6 +17,7 @@ import androidx.compose.material.icons.filled.ArrowDropUp
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -45,6 +46,7 @@ fun DrawerContent(
     onAboutClick: () -> Unit = {},
     onPrayerClick: (String) -> Unit = {},
     onRosaryTodayClick: () -> Unit = {},
+    onSettingsClick: () -> Unit = {},
     onHomeClick: () -> Unit = {},
     onExitClick: () -> Unit = {},
 ) {
@@ -79,15 +81,22 @@ fun DrawerContent(
                 NavigationDrawerItem(
                     label = { Text(stringResource(R.string.home)) },
                     selected = false,
-                    icon = { Icon(Icons.Default.Home, contentDescription = null) },
+                    icon = { Icon(Icons.Default.Home, contentDescription = stringResource(R.string.home)) },
                     onClick = { onHomeClick() },
                     modifier = Modifier.weight(1f)
                 )
                 NavigationDrawerItem(
                     label = { Text(stringResource(R.string.rosary_today)) },
                     selected = false,
-                    icon = { Icon(painterResource(id = R.drawable.celtic_cross_20), contentDescription = null) },
+                    icon = { Icon(painterResource(id = R.drawable.celtic_cross_20), contentDescription = stringResource(R.string.rosary_today)) },
                     onClick = { onRosaryTodayClick() },
+                    modifier = Modifier.weight(1f)
+                )
+                NavigationDrawerItem(
+                    label = { Text(stringResource(R.string.settings)) },
+                    selected = false,
+                    icon = { Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings)) },
+                    onClick = { onSettingsClick() },
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -95,14 +104,20 @@ fun DrawerContent(
             NavigationDrawerItem(
                 label = { Text(stringResource(R.string.home)) },
                 selected = false,
-                icon = { Icon(Icons.Default.Home, contentDescription = null) },
+                icon = { Icon(Icons.Default.Home, contentDescription = stringResource(R.string.home)) },
                 onClick = { onHomeClick() }
             )
             NavigationDrawerItem(
                 label = { Text(stringResource(R.string.rosary_today)) },
                 selected = false,
-                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20), contentDescription = null) },
+                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20), contentDescription = stringResource(R.string.rosary_today)) },
                 onClick = { onRosaryTodayClick() }
+            )
+            NavigationDrawerItem(
+                label = { Text(stringResource(R.string.settings)) },
+                selected = false,
+                icon = { Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings)) },
+                onClick = { onSettingsClick() }
             )
         }
 
