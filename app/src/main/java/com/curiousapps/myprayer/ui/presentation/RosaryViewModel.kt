@@ -3,7 +3,6 @@ package com.curiousapps.myprayer.ui.presentation
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.curiousapps.myprayer.data.PrayerAudio
 import com.curiousapps.myprayer.R
 import com.curiousapps.myprayer.data.AudioVoice
 import com.curiousapps.myprayer.data.RosaryPrayersItem
@@ -88,14 +87,24 @@ class RosaryViewModel @Inject constructor(
         _state.value = _state.value.copy(audioEnabled = isEnabled)
     }
 
+    fun setContinuousAudioEnabled(isEnabled: Boolean) {
+        settingsRepository.setContinuousAudioEnabled(isEnabled)
+        _state.value = _state.value.copy(continuousAudioEnabled = isEnabled)
+    }
+
     fun setAudioVoice(voice: AudioVoice) {
         settingsRepository.setAudioVoice(voice)
         _state.value = _state.value.copy(audioVoice = voice)
     }
 
+    fun stopPrayerAudioPlayback() {
+        _state.value = _state.value.copy(audioStopRequestId = _state.value.audioStopRequestId + 1)
+    }
+
     private fun loadSettings() {
         _state.value = _state.value.copy(
             audioEnabled = settingsRepository.isAudioEnabled(),
+            continuousAudioEnabled = settingsRepository.isContinuousAudioEnabled(),
             audioVoice = settingsRepository.getAudioVoice()
         )
     }
@@ -107,7 +116,9 @@ class RosaryViewModel @Inject constructor(
         val todaysMysterySetName: String? = null,
         val lastListScrollOffset: Int = ZERO,
         val audioEnabled: Boolean = true,
+        val continuousAudioEnabled: Boolean = false,
         val audioVoice: AudioVoice = AudioVoice.MALE,
+        val audioStopRequestId: Int = ZERO,
         val isLoading: Boolean = false,
         val error: String? = null
     )

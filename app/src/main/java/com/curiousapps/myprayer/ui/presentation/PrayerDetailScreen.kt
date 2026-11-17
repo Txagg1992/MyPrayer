@@ -36,6 +36,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -101,6 +102,10 @@ fun PrayerDetailScreen(
     val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
     var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
     var isAudioPlaying by remember { mutableStateOf(false) }
+    var isContinuousPlaybackActive by remember { mutableStateOf(false) }
+    var shouldAutoPlayNextPrayer by remember { mutableStateOf(false) }
+    val latestAudioEnabled by rememberUpdatedState(state.audioEnabled)
+    val latestContinuousAudioEnabled by rememberUpdatedState(state.continuousAudioEnabled)
 
     GradientBackground(primaryColor = Color.LightGray)
 
@@ -143,17 +148,92 @@ fun PrayerDetailScreen(
         }
         val isAudioButtonEnabled = state.audioEnabled && selectedAudioResId != ZERO
 
+        val stopPlayback: (Boolean) -> Unit = { releasePlayer ->
+            mediaPlayer?.let { player ->
+                if (player.isPlaying) {
+                    player.pause()
+                }
+                if (releasePlayer) {
+                    player.release()
+                    mediaPlayer = null
+                }
+            }
+            isAudioPlaying = false
+            isContinuousPlaybackActive = false
+            shouldAutoPlayNextPrayer = false
+        }
+
+        val startPlaybackForCurrentPrayer: (Boolean) -> Unit = { shouldContinueThroughRosary ->
+            if (selectedAudioResId == ZERO) {
+                isContinuousPlaybackActive = false
+                shouldAutoPlayNextPrayer = false
+            } else {
+                MediaPlayer.create(context, selectedAudioResId)?.apply {
+                    setOnCompletionListener { completedPlayer ->
+                        completedPlayer.release()
+                        mediaPlayer = null
+                        isAudioPlaying = false
+                        val hasNextPrayer = currentIndex < prayers.lastIndex
+                        if (
+                            isContinuousPlaybackActive &&
+                            latestAudioEnabled &&
+                            latestContinuousAudioEnabled &&
+                            hasNextPrayer &&
+                            !pageTransitionState.isAnimating
+                        ) {
+                            coroutineScope.launch {
+                                pageTransitionState.animatePageChange(direction = ONE) {
+                                    currentIndex += ONE
+                                }
+                                shouldAutoPlayNextPrayer = true
+                            }
+                        } else {
+                            isContinuousPlaybackActive = false
+                            shouldAutoPlayNextPrayer = false
+                        }
+                    }
+                    start()
+                }?.also { player ->
+                    mediaPlayer?.release()
+                    mediaPlayer = player
+                    isAudioPlaying = true
+                    isContinuousPlaybackActive = shouldContinueThroughRosary
+                } ?: run {
+                    isContinuousPlaybackActive = false
+                    shouldAutoPlayNextPrayer = false
+                }
+            }
+        }
+
         LaunchedEffect(currentIndex, state.audioVoice, state.audioEnabled) {
             mediaPlayer?.release()
             mediaPlayer = null
             isAudioPlaying = false
+            if (!state.audioEnabled) {
+                isContinuousPlaybackActive = false
+                shouldAutoPlayNextPrayer = false
+            }
+        }
+
+        LaunchedEffect(state.audioStopRequestId) {
+            if (state.audioStopRequestId > ZERO) {
+                stopPlayback(true)
+            }
+        }
+
+        LaunchedEffect(currentIndex, selectedAudioResId, shouldAutoPlayNextPrayer) {
+            if (!shouldAutoPlayNextPrayer) return@LaunchedEffect
+            shouldAutoPlayNextPrayer = false
+            if (!latestAudioEnabled || !latestContinuousAudioEnabled || selectedAudioResId == ZERO) {
+                isContinuousPlaybackActive = false
+                return@LaunchedEffect
+            }
+            startPlaybackForCurrentPrayer(true)
         }
 
         DisposableEffect(Unit) {
             onDispose {
-                mediaPlayer?.release()
-                mediaPlayer = null
-                isAudioPlaying = false
+                stopPlayback(true)
             }
         }
 
@@ -266,6 +346,8 @@ fun PrayerDetailScreen(
         ) {
             Button(
                 onClick = {
+                    isContinuousPlaybackActive = false
+                    shouldAutoPlayNextPrayer = false
                     if (currentIndex > ZERO && !pageTransitionState.isAnimating) {
                         coroutineScope.launch {
                             hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
@@ -302,22 +384,15 @@ fun PrayerDetailScreen(
                         if (currentPlayer.isPlaying) {
                             currentPlayer.pause()
                             isAudioPlaying = false
+                            isContinuousPlaybackActive = false
+                            shouldAutoPlayNextPrayer = false
                         } else {
                             currentPlayer.start()
                             isAudioPlaying = true
+                            isContinuousPlaybackActive = state.continuousAudioEnabled
                         }
                     } else {
-                        MediaPlayer.create(context, selectedAudioResId).apply {
-                            setOnCompletionListener {
-                                isAudioPlaying = false
-                                it.release()
-                                mediaPlayer = null
-                            }
-                            start()
-                        }.also {
-                            mediaPlayer = it
-                            isAudioPlaying = true
-                        }
+                        startPlaybackForCurrentPrayer(state.continuousAudioEnabled)
                     }
                 },
                 enabled = isAudioButtonEnabled && !pageTransitionState.isAnimating,
@@ -341,6 +416,8 @@ fun PrayerDetailScreen(
             }
             Button(
                 onClick = {
+                    isContinuousPlaybackActive = false
+                    shouldAutoPlayNextPrayer = false
                     if (currentIndex < prayers.size - ONE && !pageTransitionState.isAnimating) {
                         coroutineScope.launch {
                             hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)

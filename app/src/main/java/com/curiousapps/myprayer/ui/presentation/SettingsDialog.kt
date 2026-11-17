@@ -35,8 +35,10 @@ import com.curiousapps.myprayer.ui.theme.AppDimens.dimen8Dp
 @Composable
 fun SettingsDialog(
     audioEnabled: Boolean,
+    continuousAudioEnabled: Boolean,
     selectedVoice: AudioVoice,
     onAudioEnabledChange: (Boolean) -> Unit,
+    onContinuousAudioEnabledChange: (Boolean) -> Unit,
     onVoiceChange: (AudioVoice) -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -81,6 +83,18 @@ fun SettingsDialog(
                         Switch(
                             checked = audioEnabled,
                             onCheckedChange = onAudioEnabledChange
+                        )
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(text = stringResource(R.string.enable_continuous_audio))
+                        Switch(
+                            checked = continuousAudioEnabled,
+                            onCheckedChange = onContinuousAudioEnabledChange,
+                            enabled = audioEnabled
                         )
                     }
                     Text(

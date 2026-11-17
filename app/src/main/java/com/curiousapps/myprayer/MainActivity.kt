@@ -29,6 +29,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -111,6 +112,9 @@ class MainActivity : ComponentActivity() {
                     },
                     onExitClick = {
                         finish()
+                    },
+                    onDrawerOpened = {
+                        viewModel.stopPrayerAudioPlayback()
                     }
                 ) { innerPadding ->
                     NavHost(
@@ -135,9 +139,13 @@ class MainActivity : ComponentActivity() {
                         dialog("settings") {
                             SettingsDialog(
                                 audioEnabled = state.audioEnabled,
+                                continuousAudioEnabled = state.continuousAudioEnabled,
                                 selectedVoice = state.audioVoice,
                                 onAudioEnabledChange = { enabled ->
                                     viewModel.setAudioEnabled(enabled)
+                                },
+                                onContinuousAudioEnabledChange = { enabled ->
+                                    viewModel.setContinuousAudioEnabled(enabled)
                                 },
                                 onVoiceChange = { voice ->
                                     viewModel.setAudioVoice(voice)
@@ -189,6 +197,7 @@ fun AppDrawer(
     onSettingsClick: () -> Unit = {},
     onAboutClick: () -> Unit = {},
     onExitClick: () -> Unit = {},
+    onDrawerOpened: () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit
 ) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -240,6 +249,11 @@ fun AppDrawer(
         },
         drawerState = drawerState
     ) {
+        LaunchedEffect(drawerState.currentValue) {
+            if (drawerState.currentValue == DrawerValue.Open) {
+                onDrawerOpened()
+            }
+        }
         Scaffold(
             topBar = {
                 if (showTopBar) {
