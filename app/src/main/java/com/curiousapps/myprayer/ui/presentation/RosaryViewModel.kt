@@ -10,6 +10,7 @@ import com.curiousapps.myprayer.data.RosaryPrayersItem
 import com.curiousapps.myprayer.repository.PrayerRepository
 import com.curiousapps.myprayer.repository.SaintRepository
 import com.curiousapps.myprayer.repository.SettingsRepository
+import com.curiousapps.myprayer.ui.theme.AppDimens.FIVE_K
 import com.curiousapps.myprayer.ui.theme.AppDimens.ZERO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -35,7 +36,7 @@ class RosaryViewModel @Inject constructor(
         .onStart { getRosaryPrayers() }
         .stateIn(
             viewModelScope,
-            SharingStarted.WhileSubscribed(5000),
+            SharingStarted.WhileSubscribed(FIVE_K),
             RosaryState()
         )
 

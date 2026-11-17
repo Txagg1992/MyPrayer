@@ -123,7 +123,7 @@ fun DrawerContent(
             }
         }
 
-        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+        HorizontalDivider(modifier = Modifier.padding(vertical = dimen8Dp))
         NavigationDrawerItem(
             label = { Text(stringResource(R.string.saint_s_prayers)) },
             selected = false,

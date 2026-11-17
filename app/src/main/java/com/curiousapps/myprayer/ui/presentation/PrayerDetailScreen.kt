@@ -62,13 +62,17 @@ import com.curiousapps.myprayer.data.AudioVoice
 import com.curiousapps.myprayer.data.RosaryPrayersItem
 import com.curiousapps.myprayer.ui.theme.AppDimens.ONE
 import com.curiousapps.myprayer.ui.theme.AppDimens.ONE_HUNDRED
+import com.curiousapps.myprayer.ui.theme.AppDimens.ONE_EIGHTY
 import com.curiousapps.myprayer.ui.theme.AppDimens.SIX_FORTY
 import com.curiousapps.myprayer.ui.theme.AppDimens.THREE_SIXTY
+import com.curiousapps.myprayer.ui.theme.AppDimens.TWO_SIXTY
 import com.curiousapps.myprayer.ui.theme.AppDimens.ZERO
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen120Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen16Dp
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen220Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen24Dp
-import com.curiousapps.myprayer.ui.theme.AppDimens.dimen2Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen48Dp
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen72Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen8Dp
 import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
 import kotlinx.coroutines.coroutineScope
@@ -183,7 +187,7 @@ fun PrayerDetailScreen(
                                 contentScale = ContentScale.Fit,
                                 modifier = Modifier
                                     .weight(1f)
-                                    .height(220.dp)
+                                    .height(dimen220Dp)
                                     .padding(end = dimen16Dp)
                             )
                             Column(
@@ -199,22 +203,6 @@ fun PrayerDetailScreen(
                                     textAlign = TextAlign.Center,
                                     color = Color.DarkGray
                                 )
-//                                if (prayer.audio.male.isNotBlank()) {
-//                                    Text(
-//                                        text = "Male Audio: ${prayer.audio.male}",
-//                                        style = MaterialTheme.typography.bodySmall,
-//                                        modifier = Modifier.padding(top = dimen8Dp),
-//                                        color = Color.DarkGray
-//                                    )
-//                                }
-//                                if (prayer.audio.female.isNotBlank()) {
-//                                    Text(
-//                                        text = "Female Audio: ${prayer.audio.female}",
-//                                        style = MaterialTheme.typography.bodySmall,
-//                                        modifier = Modifier.padding(top = dimen8Dp),
-//                                        color = Color.DarkGray
-//                                    )
-//                                }
                             }
                         }
                     } else {
@@ -235,7 +223,7 @@ fun PrayerDetailScreen(
                                 contentScale = ContentScale.Fit,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(120.dp)
+                                    .height(dimen120Dp)
                                     .padding(horizontal = dimen24Dp, vertical = dimen8Dp)
                             )
                             Column(
@@ -252,22 +240,6 @@ fun PrayerDetailScreen(
                                     textAlign = TextAlign.Center,
                                     color = Color.DarkGray
                                 )
-//                                if (prayer.audio.male.isNotBlank()) {
-//                                    Text(
-//                                        text = "Male Audio: ${prayer.audio.male}",
-//                                        style = MaterialTheme.typography.bodySmall,
-//                                        modifier = Modifier.padding(top = dimen8Dp),
-//                                        color = Color.DarkGray
-//                                    )
-//                                }
-//                                if (prayer.audio.female.isNotBlank()) {
-//                                    Text(
-//                                        text = "Female Audio: ${prayer.audio.female}",
-//                                        style = MaterialTheme.typography.bodySmall,
-//                                        modifier = Modifier.padding(top = dimen8Dp),
-//                                        color = Color.DarkGray
-//                                    )
-//                                }
                             }
                         }
                     }
@@ -279,7 +251,7 @@ fun PrayerDetailScreen(
                         contentScale = ContentScale.Fit,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(120.dp)
+                            .height(dimen120Dp)
                             .padding(horizontal = dimen24Dp, vertical = dimen8Dp)
                     )
                 }
@@ -310,7 +282,7 @@ fun PrayerDetailScreen(
                     .weight(1f)
                     .padding(end = dimen8Dp)
                     .defaultMinSize(minHeight = 48.dp),
-                colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 )
@@ -352,7 +324,7 @@ fun PrayerDetailScreen(
                 modifier = Modifier
                     .weight(0.9f)
                     .padding(horizontal = dimen8Dp)
-                    .defaultMinSize(minHeight = 48.dp),
+                    .defaultMinSize(minHeight = dimen48Dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     contentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -382,8 +354,8 @@ fun PrayerDetailScreen(
                 modifier = Modifier
                     .weight(1f)
                     .padding(end = dimen8Dp)
-                    .defaultMinSize(minHeight = 48.dp),
-                colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                    .defaultMinSize(minHeight = dimen48Dp),
+                colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 )
@@ -410,23 +382,23 @@ private class PageTransitionState(private val density: Density) {
 
         isAnimating = true
         val exitOffset = with(density) {
-            if (direction > ZERO) (-72).dp.toPx() else 72.dp.toPx()
+            if (direction > ZERO) (-dimen72Dp).toPx() else dimen72Dp.toPx()
         }
         coroutineScope {
-            launch { pageOffsetX.animateTo(exitOffset, animationSpec = tween(durationMillis = 180)) }
-            launch { pageAlpha.animateTo(0f, animationSpec = tween(durationMillis = 180)) }
+            launch { pageOffsetX.animateTo(exitOffset, animationSpec = tween(durationMillis = ONE_EIGHTY)) }
+            launch { pageAlpha.animateTo(0f, animationSpec = tween(durationMillis = ONE_EIGHTY)) }
         }
 
         onPageSwap()
 
         val enterOffset = with(density) {
-            if (direction > ZERO) 72.dp.toPx() else (-72).dp.toPx()
+            if (direction > ZERO) dimen72Dp.toPx() else (-dimen72Dp).toPx()
         }
         pageOffsetX.snapTo(enterOffset)
         pageAlpha.snapTo(0f)
         coroutineScope {
-            launch { pageOffsetX.animateTo(0f, animationSpec = tween(durationMillis = 260)) }
-            launch { pageAlpha.animateTo(1f, animationSpec = tween(durationMillis = 260)) }
+            launch { pageOffsetX.animateTo(0f, animationSpec = tween(durationMillis = TWO_SIXTY)) }
+            launch { pageAlpha.animateTo(1f, animationSpec = tween(durationMillis = TWO_SIXTY)) }
         }
         isAnimating = false
     }

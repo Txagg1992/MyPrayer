@@ -14,6 +14,11 @@ object AppDimens {
     val dimen24Dp = 24.dp
     val dimen32Dp = 32.dp
     val dimen48Dp = 48.dp
+    val dimen72Dp = 72.dp
+    val dimen120Dp = 120.dp
+    val dimen220Dp = 220.dp
+    val dimen360Dp = 360.dp
+    val dimen480Dp = 480.dp
 
     //SP
 
@@ -27,9 +32,11 @@ object AppDimens {
     const val  THREE = 3
     const val  FIVE = 5
     const val  TEN = 10
-    const val THREE_SIXTY = 360
     const val ONE_HUNDRED = 100
+    const val ONE_EIGHTY = 180
+    const val TWO_SIXTY = 260
+    const val THREE_SIXTY = 360
     const val SIX_FORTY = 640
-    const val FIVE_K = 5000
+    const val FIVE_K = 5000L
 
 }

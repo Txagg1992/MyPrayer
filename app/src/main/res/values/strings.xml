@@ -62,4 +62,5 @@
     <string name="loading_prayers">Loading prayers…</string>
     <string name="no_prayers_found">No Prayers Found</string>
     <string name="enable_continuous_audio">Continuous Audio</string>
+    <string name="prayer_in_quiet_devotion">Prayer in quiet devotion</string>
 </resources>

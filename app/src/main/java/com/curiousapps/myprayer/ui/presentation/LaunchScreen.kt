@@ -97,7 +97,7 @@ fun LaunchScreen() {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "Prayer in quiet devotion",
+                        text = stringResource(R.string.prayer_in_quiet_devotion),
                         style = MaterialTheme.typography.labelLarge,
                         color = Color(0xFFE7EDF7),
                         textAlign = TextAlign.Center,

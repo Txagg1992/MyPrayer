@@ -28,6 +28,7 @@ import com.curiousapps.myprayer.data.AudioVoice
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen12Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen16Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen20Dp
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen2Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen4Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen8Dp
 
@@ -69,7 +70,7 @@ fun SettingsDialog(
 
                 Column(
                     modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(dimen8Dp)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -84,7 +85,7 @@ fun SettingsDialog(
                     }
                     Text(
                         text = stringResource(R.string.audio_voice),
-                        modifier = Modifier.padding(top = 2.dp)
+                        modifier = Modifier.padding(top = dimen2Dp)
                     )
 
                     Column(

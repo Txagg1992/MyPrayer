@@ -56,9 +56,12 @@ import com.curiousapps.myprayer.ui.presentation.RosaryScreen
 import com.curiousapps.myprayer.ui.presentation.RosaryViewModel
 import com.curiousapps.myprayer.ui.presentation.SettingsDialog
 import com.curiousapps.myprayer.ui.theme.AppDimens.ZERO
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen360Dp
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen480Dp
 import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import androidx.core.net.toUri
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -201,7 +204,7 @@ fun AppDrawer(
     ModalNavigationDrawer(
         drawerContent = {
             ModalDrawerSheet(
-                modifier = Modifier.widthIn(max = if (isLandscape) 480.dp else 360.dp)
+                modifier = Modifier.widthIn(max = if (isLandscape) dimen480Dp else dimen360Dp)
             ) {
                 DrawerContent(
                     onPrayerClick = { name ->
@@ -281,7 +284,7 @@ fun AppDrawer(
                     onClick = {
                         showContactDialog = false
                         val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
-                            data = Uri.parse("mailto:")
+                            data = "mailto:".toUri()
                             putExtra(Intent.EXTRA_EMAIL, arrayOf(supportEmail))
                             putExtra(Intent.EXTRA_SUBJECT, contactEmailSubject)
                         }
