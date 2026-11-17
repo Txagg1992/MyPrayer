@@ -54,9 +54,12 @@
     <string name="failed_to_parse_saint_prayers_json">Failed to parse saint_prayers.json</string>
     <string name="back_to_list">Back to list</string>
     <string name="blank_space" />
-    <string name="previous">Previous</string>
+    <string name="previous">Prev</string>
     <string name="next">Next</string>
+    <string name="play_audio">Play audio</string>
+    <string name="pause_audio">Pause audio</string>
     <string name="sign_of_the_cross">Sign of the Cross</string>
-    <string name="loading_prayers">Loading prayers...</string>
+    <string name="loading_prayers">Loading prayers…</string>
     <string name="no_prayers_found">No Prayers Found</string>
+    <string name="enable_continuous_audio">Continuous Audio</string>
 </resources>

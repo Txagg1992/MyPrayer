@@ -6,6 +6,7 @@ object AppDimens {
 
     //DP
     val dimen2Dp = 2.dp
+    val dimen4Dp = 4.dp
     val dimen8Dp = 8.dp
     val dimen12Dp = 12.dp
     val dimen16Dp = 16.dp

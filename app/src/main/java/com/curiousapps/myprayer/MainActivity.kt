@@ -120,6 +120,7 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("rosary_list") {
                             RosaryScreen(
+                                viewModel = viewModel,
                                 onNavigateToPrayer = { index ->
                                     navController.navigate("prayer_detail/$index")
                                 }
@@ -150,6 +151,7 @@ class MainActivity : ComponentActivity() {
                             val index = backStackEntry.arguments?.getInt("prayerIndex") ?: ZERO
                             PrayerDetailScreen(
                                 startIndex = index,
+                                viewModel = viewModel,
                                 onNavigateBack = { navController.popBackStack() }
                             )
                         }
@@ -163,6 +165,7 @@ class MainActivity : ComponentActivity() {
                             PrayerDetailScreen(
                                 startIndex = index,
                                 prayersOverride = state.saintPrayers,
+                                viewModel = viewModel,
                                 onNavigateBack = { navController.popBackStack() }
                             )
                         }

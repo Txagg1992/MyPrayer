@@ -1,11 +1,7 @@
 package com.curiousapps.myprayer.mainComponents
 
-import android.content.res.Configuration
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -29,8 +25,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -52,7 +46,6 @@ fun DrawerContent(
 ) {
     var showRosaryPrayers by rememberSaveable { mutableStateOf(false) }
     var showSaintPrayers by rememberSaveable { mutableStateOf(false) }
-    val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     Column(
         modifier = modifier
@@ -73,53 +66,24 @@ fun DrawerContent(
             style = MaterialTheme.typography.titleMedium
         )
 
-        if (isLandscape) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(dimen8Dp)
-            ) {
-                NavigationDrawerItem(
-                    label = { Text(stringResource(R.string.home)) },
-                    selected = false,
-                    icon = { Icon(Icons.Default.Home, contentDescription = stringResource(R.string.home)) },
-                    onClick = { onHomeClick() },
-                    modifier = Modifier.weight(1f)
-                )
-                NavigationDrawerItem(
-                    label = { Text(stringResource(R.string.rosary_today)) },
-                    selected = false,
-                    icon = { Icon(painterResource(id = R.drawable.celtic_cross_20), contentDescription = stringResource(R.string.rosary_today)) },
-                    onClick = { onRosaryTodayClick() },
-                    modifier = Modifier.weight(1f)
-                )
-                NavigationDrawerItem(
-                    label = { Text(stringResource(R.string.settings)) },
-                    selected = false,
-                    icon = { Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings)) },
-                    onClick = { onSettingsClick() },
-                    modifier = Modifier.weight(1f)
-                )
-            }
-        } else {
-            NavigationDrawerItem(
-                label = { Text(stringResource(R.string.home)) },
-                selected = false,
-                icon = { Icon(Icons.Default.Home, contentDescription = stringResource(R.string.home)) },
-                onClick = { onHomeClick() }
-            )
-            NavigationDrawerItem(
-                label = { Text(stringResource(R.string.rosary_today)) },
-                selected = false,
-                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20), contentDescription = stringResource(R.string.rosary_today)) },
-                onClick = { onRosaryTodayClick() }
-            )
-            NavigationDrawerItem(
-                label = { Text(stringResource(R.string.settings)) },
-                selected = false,
-                icon = { Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings)) },
-                onClick = { onSettingsClick() }
-            )
-        }
+        NavigationDrawerItem(
+            label = { Text(stringResource(R.string.home)) },
+            selected = false,
+            icon = { Icon(Icons.Default.Home, contentDescription = stringResource(R.string.home)) },
+            onClick = { onHomeClick() }
+        )
+        NavigationDrawerItem(
+            label = { Text(stringResource(R.string.rosary_today)) },
+            selected = false,
+            icon = { Icon(painterResource(id = R.drawable.celtic_cross_20), contentDescription = stringResource(R.string.rosary_today)) },
+            onClick = { onRosaryTodayClick() }
+        )
+        NavigationDrawerItem(
+            label = { Text(stringResource(R.string.settings)) },
+            selected = false,
+            icon = { Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings)) },
+            onClick = { onSettingsClick() }
+        )
 
         HorizontalDivider(modifier = Modifier.padding(vertical = dimen8Dp))
         NavigationDrawerItem(
@@ -149,32 +113,13 @@ fun DrawerContent(
                 stringResource(R.string.concluding_prayer) to "Concluding Prayer"
             )
 
-            if (isLandscape) {
-                rosaryPrayerItems.chunked(2).forEach { pair ->
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(dimen8Dp)
-                    ) {
-                        pair.forEach { (label, prayerName) ->
-                            NavigationDrawerItem(
-                                label = { Text(label) },
-                                selected = false,
-                                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20), contentDescription = null) },
-                                onClick = { onPrayerClick(prayerName) },
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-                    }
-                }
-            } else {
-                rosaryPrayerItems.forEach { (label, prayerName) ->
-                    NavigationDrawerItem(
-                        label = { Text(label) },
-                        selected = false,
-                        icon = { Icon(painterResource(id = R.drawable.celtic_cross_20), contentDescription = null) },
-                        onClick = { onPrayerClick(prayerName) }
-                    )
-                }
+            rosaryPrayerItems.forEach { (label, prayerName) ->
+                NavigationDrawerItem(
+                    label = { Text(label) },
+                    selected = false,
+                    icon = { Icon(painterResource(id = R.drawable.celtic_cross_20), contentDescription = null) },
+                    onClick = { onPrayerClick(prayerName) }
+                )
             }
         }
 
@@ -204,32 +149,13 @@ fun DrawerContent(
                 stringResource(R.string.prayer_to_st_christopher_traveller) to "Prayer to St. Christopher (Traveller)"
             )
 
-            if (isLandscape) {
-                saintPrayerItems.chunked(2).forEach { pair ->
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(dimen8Dp)
-                    ) {
-                        pair.forEach { (label, prayerName) ->
-                            NavigationDrawerItem(
-                                label = { Text(label) },
-                                selected = false,
-                                icon = { Icon(painterResource(id = R.drawable.celtic_cross_20), contentDescription = null) },
-                                onClick = { onPrayerClick(prayerName) },
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-                    }
-                }
-            } else {
-                saintPrayerItems.forEach { (label, prayerName) ->
-                    NavigationDrawerItem(
-                        label = { Text(label) },
-                        selected = false,
-                        icon = { Icon(painterResource(id = R.drawable.celtic_cross_20), contentDescription = null) },
-                        onClick = { onPrayerClick(prayerName) }
-                    )
-                }
+            saintPrayerItems.forEach { (label, prayerName) ->
+                NavigationDrawerItem(
+                    label = { Text(label) },
+                    selected = false,
+                    icon = { Icon(painterResource(id = R.drawable.celtic_cross_20), contentDescription = null) },
+                    onClick = { onPrayerClick(prayerName) }
+                )
             }
         }
 
@@ -241,52 +167,24 @@ fun DrawerContent(
             style = MaterialTheme.typography.titleMedium
         )
 
-        if (isLandscape) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(dimen8Dp)
-            ) {
-                NavigationDrawerItem(
-                    label = { Text(stringResource(R.string.app_information)) },
-                    selected = false,
-                    icon = { Icon(Icons.Default.Info, contentDescription = null) },
-                    onClick = { onAboutClick() },
-                    modifier = Modifier.weight(1f)
-                )
-                NavigationDrawerItem(
-                    label = { Text(stringResource(R.string.contact_us)) },
-                    selected = false,
-                    icon = { Icon(Icons.Default.Email, contentDescription = null) },
-                    onClick = { onContactUsClick() },
-                    modifier = Modifier.weight(1f)
-                )
-            }
-            NavigationDrawerItem(
-                label = { Text(stringResource(R.string.exit_app)) },
-                selected = false,
-                icon = { Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = null) },
-                onClick = { onExitClick() }
-            )
-        } else {
-            NavigationDrawerItem(
-                label = { Text(stringResource(R.string.app_information)) },
-                selected = false,
-                icon = { Icon(Icons.Default.Info, contentDescription = null) },
-                onClick = { onAboutClick() },
-            )
-            NavigationDrawerItem(
-                label = { Text(stringResource(R.string.contact_us)) },
-                selected = false,
-                icon = { Icon(Icons.Default.Email, contentDescription = null) },
-                onClick = { onContactUsClick() },
-            )
-            NavigationDrawerItem(
-                label = { Text(stringResource(R.string.exit_app)) },
-                selected = false,
-                icon = { Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = null) },
-                onClick = { onExitClick() },
-            )
-        }
+        NavigationDrawerItem(
+            label = { Text(stringResource(R.string.app_information)) },
+            selected = false,
+            icon = { Icon(Icons.Default.Info, contentDescription = null) },
+            onClick = { onAboutClick() },
+        )
+        NavigationDrawerItem(
+            label = { Text(stringResource(R.string.contact_us)) },
+            selected = false,
+            icon = { Icon(Icons.Default.Email, contentDescription = null) },
+            onClick = { onContactUsClick() },
+        )
+        NavigationDrawerItem(
+            label = { Text(stringResource(R.string.exit_app)) },
+            selected = false,
+            icon = { Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = null) },
+            onClick = { onExitClick() },
+        )
 
         Spacer(Modifier.height(dimen12Dp))
     }

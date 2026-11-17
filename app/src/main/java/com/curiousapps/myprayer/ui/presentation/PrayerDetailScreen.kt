@@ -1,5 +1,6 @@
 package com.curiousapps.myprayer.ui.presentation
 
+import android.media.MediaPlayer
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import android.content.res.Configuration
@@ -7,6 +8,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,13 +18,18 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBackIos
+import androidx.compose.material.icons.filled.Pause
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -37,17 +44,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.curiousapps.myprayer.R
+import com.curiousapps.myprayer.data.AudioVoice
 import com.curiousapps.myprayer.data.RosaryPrayersItem
 import com.curiousapps.myprayer.ui.theme.AppDimens.ONE
 import com.curiousapps.myprayer.ui.theme.AppDimens.ONE_HUNDRED
@@ -56,6 +67,7 @@ import com.curiousapps.myprayer.ui.theme.AppDimens.THREE_SIXTY
 import com.curiousapps.myprayer.ui.theme.AppDimens.ZERO
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen16Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen24Dp
+import com.curiousapps.myprayer.ui.theme.AppDimens.dimen2Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen48Dp
 import com.curiousapps.myprayer.ui.theme.AppDimens.dimen8Dp
 import com.curiousapps.myprayer.ui.theme.MyPrayerTheme
@@ -75,16 +87,16 @@ fun PrayerDetailScreen(
     val hapticFeedback = LocalHapticFeedback.current
     val coroutineScope = rememberCoroutineScope()
     val pageTransitionState = rememberPageTransitionState()
-    val state = if (prayersOverride == null) {
-        val resolvedViewModel = viewModel ?: hiltViewModel<RosaryViewModel>()
-        resolvedViewModel.state.collectAsState().value
-    } else {
-        RosaryViewModel.RosaryState(displayPrayers = prayersOverride)
-    }
+    val context = LocalContext.current
+    val resolvedViewModel = viewModel ?: if (LocalInspectionMode.current) null else hiltViewModel<RosaryViewModel>()
+    val state = resolvedViewModel?.state?.collectAsState()?.value
+        ?: RosaryViewModel.RosaryState(displayPrayers = prayersOverride ?: emptyList())
     val prayers = prayersOverride ?: state.displayPrayers
     var currentIndex by rememberSaveable { mutableIntStateOf(startIndex) }
     val appBarContentColor = Color.DarkGray
     val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
+    var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+    var isAudioPlaying by remember { mutableStateOf(false) }
 
     GradientBackground(primaryColor = Color.LightGray)
 
@@ -116,6 +128,30 @@ fun PrayerDetailScreen(
         }
 
         val prayer = prayers.getOrNull(currentIndex)
+        val selectedAudioName = when (state.audioVoice) {
+            AudioVoice.MALE -> prayer?.audio?.male.orEmpty()
+            AudioVoice.FEMALE -> prayer?.audio?.female.orEmpty()
+        }
+        val selectedAudioResId = if (selectedAudioName.isBlank()) {
+            ZERO
+        } else {
+            context.resources.getIdentifier(selectedAudioName, "raw", context.packageName)
+        }
+        val isAudioButtonEnabled = state.audioEnabled && selectedAudioResId != ZERO
+
+        LaunchedEffect(currentIndex, state.audioVoice, state.audioEnabled) {
+            mediaPlayer?.release()
+            mediaPlayer = null
+            isAudioPlaying = false
+        }
+
+        DisposableEffect(Unit) {
+            onDispose {
+                mediaPlayer?.release()
+                mediaPlayer = null
+                isAudioPlaying = false
+            }
+        }
 
         Column(
             modifier = Modifier
@@ -272,13 +308,64 @@ fun PrayerDetailScreen(
                 enabled = currentIndex > ZERO && !pageTransitionState.isAnimating,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(end = dimen8Dp),
+                    .padding(end = dimen8Dp)
+                    .defaultMinSize(minHeight = 48.dp),
                 colors = androidx.compose.material3.ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             ) {
-                Text(text = stringResource(R.string.previous))
+                Text(
+                    text = stringResource(R.string.previous),
+                    maxLines = 1,
+                    softWrap = false,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+            Button(
+                onClick = {
+                    if (!isAudioButtonEnabled) return@Button
+                    val currentPlayer = mediaPlayer
+                    if (currentPlayer != null) {
+                        if (currentPlayer.isPlaying) {
+                            currentPlayer.pause()
+                            isAudioPlaying = false
+                        } else {
+                            currentPlayer.start()
+                            isAudioPlaying = true
+                        }
+                    } else {
+                        MediaPlayer.create(context, selectedAudioResId).apply {
+                            setOnCompletionListener {
+                                isAudioPlaying = false
+                                it.release()
+                                mediaPlayer = null
+                            }
+                            start()
+                        }.also {
+                            mediaPlayer = it
+                            isAudioPlaying = true
+                        }
+                    }
+                },
+                enabled = isAudioButtonEnabled && !pageTransitionState.isAnimating,
+                modifier = Modifier
+                    .weight(0.9f)
+                    .padding(horizontal = dimen8Dp)
+                    .defaultMinSize(minHeight = 48.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            ) {
+                Icon(
+                    imageVector = if (isAudioPlaying) Icons.Default.Pause else Icons.Default.PlayArrow,
+                    contentDescription = if (isAudioPlaying) {
+                        stringResource(R.string.pause_audio)
+                    } else {
+                        stringResource(R.string.play_audio)
+                    }
+                )
             }
             Button(
                 onClick = {
@@ -294,13 +381,19 @@ fun PrayerDetailScreen(
                 enabled = currentIndex < prayers.size - ONE && !pageTransitionState.isAnimating,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(start = dimen8Dp),
+                    .padding(end = dimen8Dp)
+                    .defaultMinSize(minHeight = 48.dp),
                 colors = androidx.compose.material3.ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             ) {
-                Text(text = stringResource(R.string.next))
+                Text(
+                    text = stringResource(R.string.next),
+                    maxLines = 1,
+                    softWrap = false,
+                    overflow = TextOverflow.Ellipsis
+                )
             }
         }
     }
