@@ -142,7 +142,7 @@ fun DrawerContent(
 
         if (showSaintPrayers) {
             val saintPrayerItems = listOf(
-                stringResource(R.string.prayer_to_st_michael) to "Prayer to St. Michael",
+                stringResource(R.string.prayer_to_st_michael) to "Prayer to Archangel – Michael",
                 stringResource(R.string.prayer_to_archangel_gabriel) to "Prayer to Archangel – Gabriel",
                 stringResource(R.string.prayer_to_archangel_raphael) to "Prayer to Archangel – Raphael",
                 stringResource(R.string.prayer_to_st_christopher_protection) to "Prayer to St. Christopher (Protection)",
