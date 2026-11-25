@@ -20,7 +20,7 @@
   {
     "id": 3,
     "prayerName": "Lord's Prayer",
-    "prayerText": "Our Father who art in heaven,\nhallowed be thy name.\nThy kingdom come.\nThy will be done\non earth as it is in heaven.\nGive us this day our daily bread,\nand forgive us our trespasses,\nas we forgive those who trespass against us,\nand lead us not into temptation,\nbut deliver us from evil.\nFor thine is the kingdom and the power, and the glory,\nforever and ever.\n\nAmen.",
+    "prayerText": "Our Father, who art in heaven,\nhallowed be thy name.\nThy kingdom come.\nThy will be done\non earth as it is in heaven.\nGive us this day our daily bread,\nand forgive us our trespasses,\nas we forgive those who trespass against us,\nand lead us not into temptation,\nbut deliver us from evil.\n\nAmen.",
     "audio": {
       "male": "adam_lords_prayer",
       "female": "elise_lords_prayer"
